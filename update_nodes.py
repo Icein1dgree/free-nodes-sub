@@ -140,6 +140,24 @@ def parse_node(link):
                     "alpn": data.get("alpn", ""),
                     "grpc-service-name": data.get("serviceName", ""),
                     "link": link}
+        if link.startswith(("hy2://", "hysteria2://")):
+            # 2026-11-01 用户要只留东亚东南亚：之前 hy2 链接直接被丢掉，
+            # 但 Au1rxx 的 hy2 节点里东亚东南亚占大头（香港 58、台湾 24、韩国 17、
+            # 日本 15、新加坡 3），不解析它们东亚东南亚池子只有 83 条。
+            parsed = urllib.parse.urlparse(link)
+            qs = urllib.parse.parse_qs(parsed.query)
+            def q(k, d=""):
+                return qs.get(k, [d])[0]
+            sni = q("sni", "") or parsed.hostname or ""
+            return {"type": "hysteria2",
+                    "name": urllib.parse.unquote(parsed.fragment) or f"{parsed.hostname}:{parsed.port}",
+                    "server": parsed.hostname, "port": parsed.port,
+                    "password": urllib.parse.unquote(parsed.username or ""),
+                    "sni": sni,
+                    "obfs": q("obfs", ""),
+                    "obfs-password": q("obfs-password", "") or q("obfsPassword", ""),
+                    "skip-cert-verify": q("insecure") == "1" or q("skip-cert-verify") == "true",
+                    "link": link}
         if link.startswith(("vless://", "trojan://")):
             proto = "vless" if link.startswith("vless") else "trojan"
             parsed = urllib.parse.urlparse(link)
@@ -376,6 +394,15 @@ def proxy_to_block_lines(p):
         lines += _block_tls_lines(p)
         lines.append(f"    skip-cert-verify: {'true' if p.get('skip-cert-verify') else 'false'}")
         lines.append("    udp: false")
+    elif p["type"] == "hysteria2":
+        lines.append(f"    password: {yaml_escape(p['password'])}")
+        if p.get("sni"):
+            lines.append(f"    sni: {yaml_escape(p['sni'])}")
+        if p.get("obfs"):
+            lines.append(f"    obfs: {yaml_escape(p['obfs'])}")
+        if p.get("obfs-password"):
+            lines.append(f"    obfs-password: {yaml_escape(p['obfs-password'])}")
+        lines.append(f"    skip-cert-verify: {'true' if p.get('skip-cert-verify') else 'false'}")
     return lines
 
 
@@ -547,17 +574,16 @@ def main():
         log("筛选后为空，不覆盖旧订阅。")
         return 4
 
-    # 地区优先排序（2026-11-01 用户要求：优先东亚、东南亚）：
-    # 东亚 0、东南亚 1、北美 2、其他/未知 3，同组内保持原来源顺序。
-    # 注意：只留东亚/东南亚/北美的话，现在 4 个来源加起来只有 298 条，
-    # 凑不够 500，所以这里不硬删其他地区，而是把其他地区排在最后当填充，
-    # 这样前 298 条是目标地区，后面才是其他地区；如果用户要硬删版（298 条），
-    # 把下面这行改回过滤即可。
+    # 地区硬过滤（2026-11-01 用户要求：每次剔除北美和中国大陆，只留东亚东南亚）：
+    # 东亚：JP 韩国、KR 韩国、TW 台湾、HK 香港；东南亚：SG、MY、TH、VN、ID、PH、KH、LA、MM。
+    # 北美 US/CA/MX、大陆 CN、欧洲及其他、地区未知的一律去掉，不编造地区、不拿其他地区填充。
+    # 注意：这样最终条数不到 500（本地实测约 200 条，含新解析的 hysteria2），
+    # 这是只留东亚东南亚的直接结果，不是 bug。
     mapping = fetch_country_mapping()
     apply_region_names(alive, mapping)
     ea = {"JP", "KR", "TW", "HK"}
     sea = {"SG", "MY", "TH", "VN", "ID", "PH", "KH", "LA", "MM"}
-    na = {"US", "CA", "MX"}
+    allowed = ea | sea
 
     def region_priority(n):
         cc = region_code(n, mapping)
@@ -565,14 +591,18 @@ def main():
             return 0
         if cc in sea:
             return 1
-        if cc in na:
-            return 2
-        return 3
+        return 2
 
+    before_region = len(alive)
+    alive = [n for n in alive if region_code(n, mapping) in allowed]
+    log(f"地区过滤: {before_region} -> {len(alive)} 个（只留东亚/东南亚，北美和大陆已剔除）")
+    if not alive:
+        log("地区过滤后为空，不覆盖旧订阅。")
+        return 4
     alive.sort(key=region_priority)
     alive = alive[:MAX_NODES]
     from collections import Counter as _Counter
-    log(f"地区分布: {_Counter(region_priority(n) for n in alive)}（0=东亚,1=东南亚,2=北美,3=其他/未知）")
+    log(f"地区分布: {_Counter(region_priority(n) for n in alive)}（0=东亚,1=东南亚）")
     log(f"最终保留: {len(alive)} 个")
     for i, node in enumerate(alive, 1):
         node["name"] = f"{node['name']}-{i}" if alive else node["name"]
