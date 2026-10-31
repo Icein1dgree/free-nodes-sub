@@ -23,81 +23,7 @@ geox-url:
   mmdb: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
 
 proxies:
-  - name: "🇬🇧 英国 | trojan-1946894181-1"
-    type: trojan
-    server: 167.82.64.120
-    port: 443
-    password: "MiTiVPN"
-    sni: "firefox.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "firefox.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇩🇪 德国 | DEU-2"
-    type: vless
-    server: 199.232.239.239
-    port: 443
-    uuid: 40694ced-9a8c-42fd-f5f8-3ac3c8b27fc2
-    tls: true
-    servername: "firefox.com"
-    network: ws
-    ws-opts:
-      path: "/@CloudVPNchannel/@CloudVPNchannel/@CloudVPNchannel/@CloudVPNchannel/@CloudVPNchannel/@CloudVPNchannel?ed=2056"
-      headers:
-        Host: "mpkoe7ypcibr80p102020123.global.ssl.fastly.net"
-    client-fingerprint: "chrome"
-    alpn:
-      - "h2"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇩🇪 德国 | DEU-3"
-    type: vless
-    server: 151.101.131.6
-    port: 443
-    uuid: bdf38176-48e9-40f1-9d1c-d501c333b464
-    tls: true
-    servername: "apps.apple.com"
-    network: xhttp
-    xhttp-opts:
-      path: "/"
-    client-fingerprint: "edge"
-    alpn:
-      - "h3"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "🇳🇱 荷兰 | NLD-4"
-    type: trojan
-    server: 198.41.216.1
-    port: 443
-    password: "humanity"
-    sni: "www.cordweave.com"
-    network: ws
-    ws-opts:
-      path: "/assignment"
-      headers:
-        Host: "www.cordweave.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇳🇱 荷兰 | NLD-5"
-    type: trojan
-    server: 104.16.240.177
-    port: 443
-    password: "humanity"
-    sni: "www.cordweave.com"
-    network: ws
-    ws-opts:
-      path: "/assignment"
-      headers:
-        Host: "www.cordweave.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇺🇸 美国 | USA-6"
+  - name: "🇺🇸 美国 | USA-1"
     type: vless
     server: 8.47.69.60
     port: 443
@@ -113,7 +39,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇺🇸 美国 | USA-7"
+  - name: "🇺🇸 美国 | USA-2"
     type: vless
     server: 172.66.154.57
     port: 443
@@ -130,91 +56,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1827151410-8"
-    type: vless
-    server: 104.19.164.155
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1884771865-9"
-    type: vless
-    server: 188.114.98.0
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1941532350-10"
-    type: vless
-    server: 104.19.12.94
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1927185301-11"
-    type: vless
-    server: 104.17.50.227
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1853654571-12"
-    type: vless
-    server: 104.21.70.21
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1832764144-13"
+  - name: "🇯🇵 日本 | vless-1832764144-3"
     type: vless
     server: 104.16.10.22
     port: 443
@@ -230,24 +72,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1947014531-14"
-    type: vless
-    server: 104.18.40.171
-    port: 443
-    uuid: 8895be79-9817-4011-b81a-14a35a3d328e
-    tls: true
-    servername: "wallweb-boi.pages.dev"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "wallweb-boi.pages.dev"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1828374447-15"
+  - name: "🇯🇵 日本 | vless-1828374447-4"
     type: vless
     server: 188.114.97.6
     port: 443
@@ -264,9 +89,9 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1831072390-16"
+  - name: "🇯🇵 日本 | vless-1910526407-5"
     type: vless
-    server: 104.17.50.53
+    server: 104.16.0.1
     port: 443
     uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
     tls: true
@@ -280,40 +105,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1863476159-17"
-    type: vless
-    server: 104.21.6.186
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1827152273-18"
-    type: vless
-    server: 162.159.254.3
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1853476976-19"
+  - name: "🇯🇵 日本 | vless-1853476976-6"
     type: vless
     server: 104.16.10.185
     port: 443
@@ -330,7 +122,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1831066899-20"
+  - name: "🇯🇵 日本 | vless-1831066899-7"
     type: vless
     server: 104.16.10.56
     port: 443
@@ -346,40 +138,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1856200577-21"
-    type: vless
-    server: 172.67.217.240
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "firefox"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1863440028-22"
-    type: vless
-    server: 104.16.10.2
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1867102735-23"
+  - name: "🇯🇵 日本 | vless-1867102735-8"
     type: vless
     server: 104.19.48.107
     port: 443
@@ -396,7 +155,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1853972214-24"
+  - name: "🇯🇵 日本 | vless-1853972214-9"
     type: vless
     server: 104.24.31.89
     port: 443
@@ -413,23 +172,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1832764138-25"
-    type: vless
-    server: 104.17.210.74
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1863474247-26"
+  - name: "🇯🇵 日本 | vless-1863474247-10"
     type: vless
     server: 104.21.34.106
     port: 443
@@ -445,90 +188,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1827152152-27"
-    type: vless
-    server: 104.21.0.87
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇺🇸 美国 | vless-1947389016-28"
-    type: vless
-    server: fast.145779.xyz
-    port: 2053
-    uuid: e3149c82-00f6-4227-b2c0-b78f1dd81279
-    tls: true
-    servername: "fast.145779.xyz"
-    network: ws
-    ws-opts:
-      path: "/ws-tesla"
-      headers:
-        Host: "fast.145779.xyz"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vmess-1947375789-29"
-    type: vmess
-    server: 162.159.130.234
-    port: 2083
-    uuid: ac251237-576f-40c8-a543-554960c958b1
-    alterId: 0
-    cipher: auto
-    tls: true
-    servername: "cdn.sfacg.uk"
-    network: ws
-    ws-opts:
-      path: "/or3"
-      headers:
-        Host: "or3.sfacg.uk"
-    skip-cert-verify: false
-    udp: false
-  - name: "vless-1828374596-30"
-    type: vless
-    server: 104.21.33.59
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1946894790-31"
-    type: vless
-    server: 172.64.152.52
-    port: 443
-    uuid: 2d4b819d-6fa6-4db2-8434-61e7db0fe93c
-    tls: true
-    servername: "cf.zhahui.de5.net"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "cf.zhahui.de5.net"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1863464818-32"
+  - name: "🇯🇵 日本 | vless-1863464818-11"
     type: vless
     server: 104.18.42.98
     port: 443
@@ -544,55 +204,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1863440034-33"
-    type: vless
-    server: 104.16.10.234
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1863468525-34"
-    type: vless
-    server: 104.19.33.25
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1863440009-35"
-    type: vless
-    server: 104.16.10.48
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1832764134-36"
+  - name: "🇯🇵 日本 | vless-1832764134-12"
     type: vless
     server: 104.16.10.135
     port: 443
@@ -608,46 +220,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇳🇱 荷兰 | trojan-1923819684-37"
-    type: trojan
-    server: 172.67.203.46
-    port: 443
-    password: "humanity"
-    sni: "www.cordweave.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.cordweave.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1934984141-38"
-    type: trojan
-    server: 104.19.95.153
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1858673309-39"
-    type: trojan
-    server: 104.18.8.83
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇯🇵 日本 | vless-1856199614-40"
+  - name: "🇯🇵 日本 | vless-1856199614-13"
     type: vless
     server: 104.16.111.102
     port: 443
@@ -664,427 +237,7 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1832764140-41"
-    type: vless
-    server: 172.67.156.147
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vmess-1907162640-42"
-    type: vmess
-    server: 104.21.0.1
-    port: 2083
-    uuid: ac251237-576f-40c8-a543-554960c958b1
-    alterId: 0
-    cipher: auto
-    tls: true
-    servername: "or3.sfacg.uk"
-    network: ws
-    ws-opts:
-      path: "/or3"
-      headers:
-        Host: "or3.sfacg.uk"
-    skip-cert-verify: false
-    udp: false
-  - name: "vmess-1938957366-43"
-    type: vmess
-    server: 188.114.96.3
-    port: 8443
-    uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
-    alterId: 0
-    cipher: auto
-    tls: true
-    servername: "v2ray1.dozapp.xyz"
-    network: ws
-    ws-opts:
-      path: "/lMnsZUN4/"
-      headers:
-        Host: "v2ray1.dozapp.xyz"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1908518028-44"
-    type: trojan
-    server: 104.17.121.9
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1853348743-45"
-    type: trojan
-    server: 45.130.125.75
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1827148954-46"
-    type: trojan
-    server: 104.16.7.70
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1827148859-47"
-    type: trojan
-    server: 104.21.103.254
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1827149560-48"
-    type: trojan
-    server: 172.67.231.254
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1857007066-49"
-    type: trojan
-    server: 104.17.121.43
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇳🇱 荷兰 | trojan-1940455323-50"
-    type: trojan
-    server: 8.6.112.206
-    port: 443
-    password: "humanity"
-    sni: "www.trusteeforward.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.trusteeforward.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1939844054-51"
-    type: trojan
-    server: 104.25.240.193
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇳🇱 荷兰 | trojan-1939845059-52"
-    type: trojan
-    server: 172.64.231.133
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇳🇱 荷兰 | trojan-1827188168-53"
-    type: trojan
-    server: 188.114.97.6
-    port: 443
-    password: "humanity"
-    sni: "www.trusteeforward.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.trusteeforward.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇯🇵 日本 | vless-1831081766-54"
-    type: vless
-    server: 104.27.46.35
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1854335913-55"
-    type: vless
-    server: 104.16.10.104
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1843512959-56"
-    type: vless
-    server: 104.16.10.72
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "vmess-1827159661-57"
-    type: vmess
-    server: 104.21.91.53
-    port: 8443
-    uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
-    alterId: 0
-    cipher: auto
-    tls: true
-    servername: "v2ray1.dozapp.xyz"
-    network: ws
-    ws-opts:
-      path: "/lMnsZUN4/"
-      headers:
-        Host: "v2ray1.dozapp.xyz"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1853462719-58"
-    type: trojan
-    server: 185.18.250.245
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1939845073-59"
-    type: trojan
-    server: 172.67.223.48
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1853491995-60"
-    type: trojan
-    server: 104.18.32.47
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1853461582-61"
-    type: trojan
-    server: 104.16.71.213
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1827149109-62"
-    type: trojan
-    server: 185.18.250.252
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇳🇱 荷兰 | trojan-1947413506-63"
-    type: trojan
-    server: 104.17.206.147
-    port: 443
-    password: "humanity"
-    sni: "www.trusteeforward.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.trusteeforward.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇳🇱 荷兰 | trojan-1827188005-64"
-    type: trojan
-    server: 172.66.40.99
-    port: 443
-    password: "humanity"
-    sni: "www.trusteeforward.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.trusteeforward.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇫🇷 法国 | trojan-1944218170-65"
-    type: trojan
-    server: 104.25.0.1
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "trojan-1828472626-66"
-    type: trojan
-    server: 104.16.72.50
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇳🇱 荷兰 | NLD-67"
-    type: trojan
-    server: 172.64.153.224
-    port: 443
-    password: "humanity"
-    sni: "www.cordweave.com"
-    network: ws
-    ws-opts:
-      path: "/assignment"
-      headers:
-        Host: "www.cordweave.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇳🇱 荷兰 | NLD-68"
-    type: trojan
-    server: 172.64.151.20
-    port: 443
-    password: "humanity"
-    sni: "www.cordweave.com"
-    network: ws
-    ws-opts:
-      path: "/assignment"
-      headers:
-        Host: "www.cordweave.com"
-    skip-cert-verify: true
-    udp: false
-  - name: "🇯🇵 日本 | vless-1910526407-69"
-    type: vless
-    server: 104.16.0.1
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1828654076-70"
-    type: vless
-    server: 104.21.70.228
-    port: 443
-    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
-    tls: true
-    servername: "jp3.yohototo.top"
-    network: ws
-    ws-opts:
-      path: "/tyxyws"
-      headers:
-        Host: "jp3.yohototo.top"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "🇯🇵 日本 | vless-1921748885-71"
+  - name: "🇯🇵 日本 | vless-1921748885-14"
     type: vless
     server: 104.24.0.1
     port: 443
@@ -1101,11 +254,144 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "vless-1946224541-72"
+  - name: "🇯🇵 日本 | vless-1827151410-15"
     type: vless
-    server: 172.67.199.126
+    server: 104.19.164.155
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1927185301-16"
+    type: vless
+    server: 104.17.50.227
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1947014531-17"
+    type: vless
+    server: 104.18.40.171
+    port: 443
+    uuid: 8895be79-9817-4011-b81a-14a35a3d328e
+    tls: true
+    servername: "wallweb-boi.pages.dev"
+    network: ws
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "wallweb-boi.pages.dev"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1831072390-18"
+    type: vless
+    server: 104.17.50.53
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1827152273-19"
+    type: vless
+    server: 162.159.254.3
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1856200577-20"
+    type: vless
+    server: 172.67.217.240
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    client-fingerprint: "firefox"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1863440028-21"
+    type: vless
+    server: 104.16.10.2
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1832764138-22"
+    type: vless
+    server: 104.17.210.74
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | vless-1947389016-23"
+    type: vless
+    server: fast.145779.xyz
     port: 2053
-    uuid: c83f15bf-1817-4ec8-a19f-6393d226434c
+    uuid: e3149c82-00f6-4227-b2c0-b78f1dd81279
     tls: true
     servername: "fast.145779.xyz"
     network: ws
@@ -1118,7 +404,79 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇯🇵 日本 | vless-1827962637-73"
+  - name: "🇯🇵 日本 | vmess-1947375789-24"
+    type: vmess
+    server: 162.159.130.234
+    port: 2083
+    uuid: ac251237-576f-40c8-a543-554960c958b1
+    alterId: 0
+    cipher: auto
+    tls: true
+    servername: "cdn.sfacg.uk"
+    network: ws
+    ws-opts:
+      path: "/or3"
+      headers:
+        Host: "or3.sfacg.uk"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇯🇵 日本 | vless-1946894790-25"
+    type: vless
+    server: 172.64.152.52
+    port: 443
+    uuid: 2d4b819d-6fa6-4db2-8434-61e7db0fe93c
+    tls: true
+    servername: "cf.zhahui.de5.net"
+    network: ws
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "cf.zhahui.de5.net"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1863440034-26"
+    type: vless
+    server: 104.16.10.234
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1863468525-27"
+    type: vless
+    server: 104.19.33.25
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1875022971-28"
+    type: trojan
+    server: 216.106.186.32
+    port: 443
+    password: "dba20dcb635e430fa4d3bfc303a149d2"
+    sni: "blog.findlocaljobnetworkandbuildcommunityconnections.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇯🇵 日本 | vless-1827962637-29"
     type: vless
     server: 104.16.111.195
     port: 443
@@ -1134,61 +492,277 @@ proxies:
     packet-encoding: xudp
     skip-cert-verify: false
     udp: true
-  - name: "🇫🇷 法国 | trojan-1894622732-74"
-    type: trojan
-    server: 45.130.125.126
-    port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
+  - name: "🇯🇵 日本 | vmess-1907162640-30"
+    type: vmess
+    server: 104.21.0.1
+    port: 2083
+    uuid: ac251237-576f-40c8-a543-554960c958b1
+    alterId: 0
+    cipher: auto
+    tls: true
+    servername: "or3.sfacg.uk"
     network: ws
     ws-opts:
-      path: "/"
+      path: "/or3"
       headers:
-        Host: "www.calmlunch.com"
+        Host: "or3.sfacg.uk"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇯🇵 日本 | vless-1831081766-31"
+    type: vless
+    server: 104.27.46.35
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1854335913-32"
+    type: vless
+    server: 104.16.10.104
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1877412058-33"
+    type: trojan
+    server: 216.106.186.33
+    port: 443
+    password: "f0eb8c92ce8946aaba856569cff1a16b"
+    sni: "resources.findlocaljobnetworkandbuildcommunityconnections.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | vless-1854341788-34"
+    type: vless
+    server: 51.81.203.63
+    port: 443
+    uuid: cb2dbb6a-a1ea-4023-9ace-6466cee57241
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.icloud.com"
+    network: tcp
+    reality-opts:
+      public-key: "nqwCf6oW49tEtmQ0EzxigZ0uu1pg0E30CS54G40Iti0"
+      short-id: "4477382ff6d3d41c"
+    client-fingerprint: "chrome"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | vless-1853340242-35"
+    type: vless
+    server: 15.204.97.219
+    port: 23576
+    uuid: 48ff2b70-e180-582f-8866-d9a2edeed5f5
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "fuck.rkn"
+    network: tcp
+    reality-opts:
+      public-key: "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s"
+      short-id: "01"
+    client-fingerprint: "chrome"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1943481639-36"
+    type: trojan
+    server: 167.88.61.85
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "resources.browseseniorrolesandenhanceyourcareertoday.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇯🇵 日本 | vless-1884771865-37"
+    type: vless
+    server: 188.114.98.0
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1943021612-38"
+    type: trojan
+    server: 167.88.61.175
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "blog.browseseniorrolesandenhanceyourcareertoday.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇯🇵 日本 | vless-1863476159-39"
+    type: vless
+    server: 104.21.6.186
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1941512533-40"
+    type: trojan
+    server: 167.88.61.198
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "cdn.browseseniorrolesandenhanceyourcareertoday.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1939845099-41"
+    type: trojan
+    server: 167.88.61.20
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "api.browseseniorrolesandenhanceyourcareertoday.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1941512524-42"
+    type: trojan
+    server: 167.88.61.193
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "browseseniorrolesandenhanceyourcareertoday.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇯🇵 日本 | vless-1827152152-43"
+    type: vless
+    server: 104.21.0.87
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1828654076-44"
+    type: vless
+    server: 104.21.70.228
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇯🇵 日本 | vless-1832764140-45"
+    type: vless
+    server: 172.67.156.147
+    port: 443
+    uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+    tls: true
+    servername: "jp3.yohototo.top"
+    network: ws
+    ws-opts:
+      path: "/tyxyws"
+      headers:
+        Host: "jp3.yohototo.top"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1929965354-46"
+    type: trojan
+    server: 66.163.114.45
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "cdn.findconnectwithemployersandbuildprofessionalnetwork.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1940485917-47"
+    type: trojan
+    server: 66.163.114.132
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "66.163.114.132"
     skip-cert-verify: true
     udp: false
-  - name: "🇫🇷 法国 | trojan-1827938592-75"
+  - name: "🇺🇸 美国 | trojan-1935007688-48"
     type: trojan
-    server: 162.159.91.211
+    server: 66.163.114.245
     port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "findconnectwithemployersandbuildprofessionalnetwork.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1938560222-49"
+    type: trojan
+    server: 66.163.114.114
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "66.163.114.114"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1933715123-50"
+    type: trojan
+    server: 66.163.114.166
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "blog.findconnectwithemployersandbuildprofessionalnetwork.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1929965351-51"
+    type: trojan
+    server: 66.163.114.106
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "www.findconnectwithemployersandbuildprofessionalnetwork.com"
     skip-cert-verify: false
     udp: false
-  - name: "trojan-1944218172-76"
+  - name: "🇺🇸 美国 | trojan-1929965347-52"
     type: trojan
-    server: 104.27.0.1
+    server: 66.163.114.126
     port: 443
-    password: "humanity"
-    sni: "www.calmlunch.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.calmlunch.com"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "resources.findconnectwithemployersandbuildprofessionalnetwork.com"
     skip-cert-verify: false
     udp: false
-  - name: "🇳🇱 荷兰 | trojan-1937399876-77"
+  - name: "🇺🇸 美国 | USA-53"
     type: trojan
-    server: 45.128.76.242
-    port: 443
-    password: "humanity"
-    sni: "www.trusteeforward.com"
-    network: ws
-    ws-opts:
-      path: "/"
-      headers:
-        Host: "www.trusteeforward.com"
-    skip-cert-verify: false
-    udp: false
-  - name: "🇳🇱 荷兰 | NLD-78"
-    type: trojan
-    server: 172.67.74.177
+    server: 179.255.136.143
     port: 443
     password: "humanity"
     sni: "www.cordweave.com"
@@ -1199,23 +773,358 @@ proxies:
         Host: "www.cordweave.com"
     skip-cert-verify: true
     udp: false
-  - name: "vmess-1827159639-79"
-    type: vmess
-    server: chatgpt.com
-    port: 8443
-    uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
-    alterId: 0
-    cipher: auto
+  - name: "🇺🇸 美国 | vless-1888152403-54"
+    type: vless
+    server: 45.76.172.197
+    port: 443
+    uuid: b256c867-a020-48e0-be80-1b079f2613a2
     tls: true
-    servername: "v2ray1.dozapp.xyz"
+    servername: "itunes.apple.com"
     network: ws
     ws-opts:
-      path: "/lMnsZUN4/"
+      path: "/ws"
       headers:
-        Host: "v2ray1.dozapp.xyz"
+        Host: "itunes.apple.com"
+    reality-opts:
+      public-key: "Ag8SQ5QdqfHO9pKWA93kqGmH5EQo7Xm5Z4RbPnwPBBE"
+      short-id: "ff3597db"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | vless-1850140815-55"
+    type: vless
+    server: 144.202.126.147
+    port: 443
+    uuid: 45d51389-0c38-4843-8ae8-cffb94e97a72
+    tls: true
+    servername: "itunes.apple.com"
+    network: ws
+    ws-opts:
+      path: "/ws"
+      headers:
+        Host: "itunes.apple.com"
+    reality-opts:
+      public-key: "jO7THaLxz0Oz3kePAJcuwcKNTlsWoEWGh18zzRmiXgo"
+      short-id: "77c4230d"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1946215896-56"
+    type: trojan
+    server: 66.163.112.121
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "66.163.112.121"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1935612269-57"
+    type: trojan
+    server: 66.163.112.242
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "api.nextjobopportunityandclaimyouridealrole.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1935007685-58"
+    type: trojan
+    server: 66.163.112.76
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "api.unlockyourfuturefindyourperfectcareer.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1930077586-59"
+    type: trojan
+    server: 66.163.112.142
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "cdn.unlockyourfuturefindyourperfectcareer.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1929965329-60"
+    type: trojan
+    server: 66.163.112.31
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "unlockyourfuturefindyourperfectcareer.com"
     skip-cert-verify: false
     udp: false
-  - name: "🇺🇸 美国 | trojan-1827955817-80"
+  - name: "🇺🇸 美国 | vless-1947501567-61"
+    type: vless
+    server: 161.114.14.46
+    port: 21899
+    uuid: fb69a6b9-980c-48c2-a94f-5f95868a2d2a
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "yahoo.com"
+    network: tcp
+    reality-opts:
+      public-key: "kvLUYW6fwHXutu8Z4On6mi61kjslCyCc8ErFffUM1D0"
+      short-id: "dedce016e3671418"
+    client-fingerprint: "firefox"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1935007690-62"
+    type: trojan
+    server: 66.163.112.147
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "courses.unlockyourfuturefindyourperfectcareer.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1938557333-63"
+    type: trojan
+    server: 66.163.112.171
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "learn.unlockyourfuturefindyourperfectcareer.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1940485908-64"
+    type: trojan
+    server: 66.163.112.13
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "66.163.112.13"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | vless-1945992008-65"
+    type: vless
+    server: 31.172.69.31
+    port: 8443
+    uuid: 9c6e83fc-b755-4ad4-9b0a-14b610153d8f
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.samsung.com"
+    network: tcp
+    reality-opts:
+      public-key: "H43_itYl9CE0AJiCktUfriENFmixY_MTHgX8slCrN2Q"
+      short-id: "a4e32c324d86cfdf"
+    client-fingerprint: "qq"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | vless-1883103905-66"
+    type: vless
+    server: 195.211.98.43
+    port: 443
+    uuid: 1b4b11d5-4c2d-4533-9a55-636757cdee94
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.cloudflare.com"
+    network: tcp
+    reality-opts:
+      public-key: "xPnpkXu5qfwIArlHKvJsqKJnGdGbJK1tT2GzWMyLohA"
+      short-id: "9c56fddf237e8eaf"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1849374991-67"
+    type: trojan
+    server: 66.23.203.21
+    port: 59689
+    password: "ae7eb4dwyaz25pxwgq59"
+    sni: "66.23.203.21"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1943754366-68"
+    type: trojan
+    server: 216.152.155.131
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: ""
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1929965340-69"
+    type: trojan
+    server: 216.152.155.23
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "courses.nextjobopportunityandclaimyouridealrole.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1935796418-70"
+    type: trojan
+    server: 216.152.155.54
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "216.152.155.54"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1931858183-71"
+    type: trojan
+    server: 216.152.155.176
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "blog.nextjobopportunityandclaimyouridealrole.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇹🇼 台湾 | vless-1944434951-72"
+    type: vless
+    server: n04.jinggai.online
+    port: 8443
+    uuid: 91ad30e9-ab06-4b4c-9fb9-1c2aa97d8b3a
+    tls: true
+    servername: "n04.jinggai.online"
+    network: ws
+    ws-opts:
+      path: "/nvl-n04-ws/e0577fe8fd7c8823"
+      headers:
+        Host: "n04.jinggai.online"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | vless-1944902761-73"
+    type: vless
+    server: fast.145779.xyz
+    port: 2053
+    uuid: c83f15bf-1817-4ec8-a19f-6393d226434c
+    tls: true
+    servername: "fast.145779.xyz"
+    network: ws
+    ws-opts:
+      path: "/ws-tesla"
+      headers:
+        Host: "fast.145779.xyz"
+    client-fingerprint: "chrome"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇨🇦 加拿大 | trojan-1939845057-74"
+    type: trojan
+    server: 216.152.147.48
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "courses.connectingpeoplewithgreatjobs.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇨🇦 加拿大 | trojan-1939845081-75"
+    type: trojan
+    server: 216.152.147.93
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "connectingpeoplewithgreatjobs.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇨🇦 加拿大 | trojan-1947400782-76"
+    type: trojan
+    server: 216.152.147.79
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "blog.connectingpeoplewithgreatjobs.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇨🇦 加拿大 | trojan-1939845075-77"
+    type: trojan
+    server: 216.152.147.152
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "learn.connectingpeoplewithgreatjobs.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇨🇦 加拿大 | trojan-1939845055-78"
+    type: trojan
+    server: 216.152.147.74
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "api.connectingpeoplewithgreatjobs.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇨🇦 加拿大 | trojan-1943481635-79"
+    type: trojan
+    server: 216.152.147.85
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "cdn.connectingpeoplewithgreatjobs.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1942154526-80"
+    type: trojan
+    server: 170.101.101.67
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "courses.explorecreativejobsandenhanceyourcareerportfolio.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇯🇵 日本 | vless-1947401655-81"
+    type: vless
+    server: www.speedtest.net
+    port: 443
+    uuid: ec23f217-23a1-4f62-b98d-ba56070de89c
+    tls: true
+    servername: "wallweb4.pages.dev"
+    network: ws
+    ws-opts:
+      path: "/fp=chrome"
+      headers:
+        Host: "wallweb4.pages.dev"
+    encryption: none
+    packet-encoding: xudp
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | trojan-1947502359-82"
+    type: trojan
+    server: 170.101.101.211
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "api.explorecreativejobsandenhanceyourcareerportfolio.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1941512529-83"
+    type: trojan
+    server: 170.101.101.53
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "www.explorecreativejobsandenhanceyourcareerportfolio.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1944436566-84"
+    type: trojan
+    server: 170.101.101.112
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "resources.explorecreativejobsandenhanceyourcareerportfolio.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1941064101-85"
+    type: trojan
+    server: 170.101.101.131
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "blog.explorecreativejobsandenhanceyourcareerportfolio.com"
+    skip-cert-verify: false
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1940466732-86"
+    type: trojan
+    server: 216.152.156.49
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "cdn.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1940466747-87"
+    type: trojan
+    server: 216.152.156.81
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: ""
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1933715116-88"
+    type: trojan
+    server: 216.152.156.212
+    port: 443
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "courses.healthcarejobshubenhancemedicalprofessionalskillstoday.com"
+    skip-cert-verify: true
+    udp: false
+  - name: "🇺🇸 美国 | trojan-1827955817-89"
     type: trojan
     server: 69.164.240.85
     port: 50875
@@ -1223,71 +1132,7 @@ proxies:
     sni: "69.164.240.85"
     skip-cert-verify: true
     udp: false
-  - name: "vless-1869872045-81"
-    type: vless
-    server: 167.17.69.171
-    port: 443
-    uuid: 00144519-7e0d-476b-8d28-435576af9262
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.cloudflare.com"
-    network: tcp
-    reality-opts:
-      public-key: "ALT8hIGeZEhi0sQFbXP_ntBg8Xo-v7i0YCLrqTnBxRk"
-      short-id: "0990d22f"
-    client-fingerprint: "chrome"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1891839087-82"
-    type: vless
-    server: 169.40.42.74
-    port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    client-fingerprint: "random"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1828373732-83"
-    type: vless
-    server: 169.40.42.89
-    port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    client-fingerprint: "chrome"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1853462782-84"
-    type: vless
-    server: 169.40.42.235
-    port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    client-fingerprint: "random"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "🇺🇸 美国 | vless-1879373946-85"
+  - name: "🇺🇸 美国 | vless-1879373946-90"
     type: vless
     server: 169.40.42.168
     port: 443
@@ -1303,38 +1148,7 @@ proxies:
     encryption: none
     skip-cert-verify: false
     udp: true
-  - name: "🇺🇸 美国 | vless-1853350171-86"
-    type: vless
-    server: 159.89.87.21
-    port: 28190
-    uuid: 14c80e0e-f7ce-4991-94fc-99a1db4a9b1e
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "aws.amazon.com"
-    network: tcp
-    reality-opts:
-      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
-      short-id: ""
-    client-fingerprint: "firefox"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "🇺🇸 美国 | vless-1854038780-87"
-    type: vless
-    server: 185.95.231.156
-    port: 443
-    uuid: 1f8cf47a-b66a-4916-979f-26edfcf44eea
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "www.apple.com"
-    network: tcp
-    reality-opts:
-      public-key: "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To"
-      short-id: "a3a578ab"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "🇺🇸 美国 | vless-1827319616-88"
+  - name: "🇺🇸 美国 | vless-1827319616-91"
     type: vless
     server: 169.40.42.163
     port: 443
@@ -1349,23 +1163,7 @@ proxies:
     encryption: none
     skip-cert-verify: false
     udp: true
-  - name: "vless-1828293967-89"
-    type: vless
-    server: 169.40.42.202
-    port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    client-fingerprint: "ios"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "🇺🇸 美国 | vless-1854336874-90"
+  - name: "🇺🇸 美国 | vless-1854336874-92"
     type: vless
     server: 169.40.42.224
     port: 443
@@ -1381,9 +1179,55 @@ proxies:
     encryption: none
     skip-cert-verify: false
     udp: true
-  - name: "vless-1853462750-91"
+  - name: "🇺🇸 美国 | vless-1854038780-93"
     type: vless
-    server: 169.40.42.229
+    server: 185.95.231.156
+    port: 443
+    uuid: 1f8cf47a-b66a-4916-979f-26edfcf44eea
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.apple.com"
+    network: tcp
+    reality-opts:
+      public-key: "8eXftARun6KH38UZhuqIfPR1VF2DLS9RMBZEnF5k6To"
+      short-id: "a3a578ab"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
+  - name: "🇨🇦 加拿大 | vless-1827155346-94"
+    type: vless
+    server: 66.70.179.198
+    port: 2053
+    uuid: dc620cd6-a9d8-4a0f-8f18-006b895db77e
+    tls: true
+    servername: "www.cloudflare.com"
+    network: tcp
+    reality-opts:
+      public-key: "k4l6TxwkBbx9DhZAFpByq5rfCWFSgyOex3f_eFe9CWU"
+      short-id: "83f8317a948bb769"
+    client-fingerprint: "firefox"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
+  - name: "🇨🇦 加拿大 | vless-1828036218-95"
+    type: vless
+    server: 209.200.246.148
+    port: 443
+    uuid: ca52e2b6-fb9f-4dac-b6dc-49da9923f251
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "www.cloudflare.com"
+    network: tcp
+    reality-opts:
+      public-key: "uTmb-ytXsx8p0fkBz7A76SHpWk7_oVutIA4LGTE8BQk"
+      short-id: "f98843107912e782"
+    client-fingerprint: "firefox"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
+  - name: "🇺🇸 美国 | vless-1827162772-96"
+    type: vless
+    server: 169.40.42.231
     port: 443
     uuid: d65cc14c-f53f-4fe2-b262-97856601319c
     flow: "xtls-rprx-vision"
@@ -1393,11 +1237,10 @@ proxies:
     reality-opts:
       public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
       short-id: "c39cc7310a"
-    client-fingerprint: "chrome"
     encryption: none
     skip-cert-verify: false
     udp: true
-  - name: "🇺🇸 美国 | vless-1883549617-92"
+  - name: "🇺🇸 美国 | vless-1883549617-97"
     type: vless
     server: 195.123.235.183
     port: 443
@@ -1416,7 +1259,7 @@ proxies:
     encryption: none
     skip-cert-verify: false
     udp: true
-  - name: "🇺🇸 美国 | vless-1891858676-93"
+  - name: "🇺🇸 美国 | vless-1891858676-98"
     type: vless
     server: 195.123.235.177
     port: 443
@@ -1431,118 +1274,30 @@ proxies:
     encryption: none
     skip-cert-verify: false
     udp: true
-  - name: "vless-1827147089-94"
-    type: vless
-    server: 169.40.42.35
+  - name: "🇲🇽 墨西哥 | trojan-1929965361-99"
+    type: trojan
+    server: 216.238.80.100
     port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    client-fingerprint: "chrome"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "🇺🇸 美国 | vless-1827162772-95"
-    type: vless
-    server: 169.40.42.231
-    port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1853340497-96"
-    type: vless
-    server: 169.40.42.104
-    port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    client-fingerprint: "chrome"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1828149368-97"
-    type: vless
-    server: 169.40.42.225
-    port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    client-fingerprint: "random"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "vless-1828293988-98"
-    type: vless
-    server: 169.40.42.90
-    port: 443
-    uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-    flow: "xtls-rprx-vision"
-    tls: true
-    servername: "yahoo.com"
-    network: tcp
-    reality-opts:
-      public-key: "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg"
-      short-id: "c39cc7310a"
-    client-fingerprint: "ios"
-    encryption: none
-    skip-cert-verify: false
-    udp: true
-  - name: "🇺🇸 美国 | vless-1944902761-99"
-    type: vless
-    server: fast.145779.xyz
-    port: 2053
-    uuid: c83f15bf-1817-4ec8-a19f-6393d226434c
-    tls: true
-    servername: "fast.145779.xyz"
-    network: ws
-    ws-opts:
-      path: "/ws-tesla"
-      headers:
-        Host: "fast.145779.xyz"
-    client-fingerprint: "chrome"
-    encryption: none
-    packet-encoding: xudp
-    skip-cert-verify: false
-    udp: true
-  - name: "vmess-1827160359-100"
-    type: vmess
-    server: www.shopify.com
-    port: 443
-    uuid: 6a89a215-22bf-4bd7-9642-b95b2e09583a
-    alterId: 0
-    cipher: auto
-    tls: true
-    servername: "guanwang.awsno.com"
-    network: ws
-    ws-opts:
-      path: "/hls/cctv5phd.m3u8"
-      headers:
-        Host: "guanwang.awsno.com"
+    password: "0ab6c98dae3b48e8b9c4a776b6c9c19a"
+    sni: "connectwithtopemployersandfindidealjobs.com"
     skip-cert-verify: false
     udp: false
+  - name: "🇺🇸 美国 | vless-1853350171-100"
+    type: vless
+    server: 159.89.87.21
+    port: 28190
+    uuid: 14c80e0e-f7ce-4991-94fc-99a1db4a9b1e
+    flow: "xtls-rprx-vision"
+    tls: true
+    servername: "aws.amazon.com"
+    network: tcp
+    reality-opts:
+      public-key: "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno"
+      short-id: ""
+    client-fingerprint: "firefox"
+    encryption: none
+    skip-cert-verify: false
+    udp: true
 
 proxy-groups:
   - name: 🚀 节点选择
@@ -1550,191 +1305,191 @@ proxy-groups:
     proxies:
       - ♻️ 自动选择
       - DIRECT
-      - "🇬🇧 英国 | trojan-1946894181-1"
-      - "🇩🇪 德国 | DEU-2"
-      - "🇩🇪 德国 | DEU-3"
-      - "🇳🇱 荷兰 | NLD-4"
-      - "🇳🇱 荷兰 | NLD-5"
-      - "🇺🇸 美国 | USA-6"
-      - "🇺🇸 美国 | USA-7"
-      - "🇯🇵 日本 | vless-1827151410-8"
-      - "🇯🇵 日本 | vless-1884771865-9"
-      - "vless-1941532350-10"
-      - "🇯🇵 日本 | vless-1927185301-11"
-      - "vless-1853654571-12"
-      - "🇯🇵 日本 | vless-1832764144-13"
-      - "🇯🇵 日本 | vless-1947014531-14"
-      - "🇯🇵 日本 | vless-1828374447-15"
-      - "🇯🇵 日本 | vless-1831072390-16"
-      - "🇯🇵 日本 | vless-1863476159-17"
-      - "🇯🇵 日本 | vless-1827152273-18"
-      - "🇯🇵 日本 | vless-1853476976-19"
-      - "🇯🇵 日本 | vless-1831066899-20"
-      - "🇯🇵 日本 | vless-1856200577-21"
-      - "🇯🇵 日本 | vless-1863440028-22"
-      - "🇯🇵 日本 | vless-1867102735-23"
-      - "🇯🇵 日本 | vless-1853972214-24"
-      - "🇯🇵 日本 | vless-1832764138-25"
-      - "🇯🇵 日本 | vless-1863474247-26"
-      - "🇯🇵 日本 | vless-1827152152-27"
-      - "🇺🇸 美国 | vless-1947389016-28"
-      - "🇯🇵 日本 | vmess-1947375789-29"
-      - "vless-1828374596-30"
-      - "🇯🇵 日本 | vless-1946894790-31"
-      - "🇯🇵 日本 | vless-1863464818-32"
-      - "🇯🇵 日本 | vless-1863440034-33"
-      - "🇯🇵 日本 | vless-1863468525-34"
-      - "vless-1863440009-35"
-      - "🇯🇵 日本 | vless-1832764134-36"
-      - "🇳🇱 荷兰 | trojan-1923819684-37"
-      - "🇫🇷 法国 | trojan-1934984141-38"
-      - "🇫🇷 法国 | trojan-1858673309-39"
-      - "🇯🇵 日本 | vless-1856199614-40"
-      - "🇯🇵 日本 | vless-1832764140-41"
-      - "🇯🇵 日本 | vmess-1907162640-42"
-      - "vmess-1938957366-43"
-      - "🇫🇷 法国 | trojan-1908518028-44"
-      - "🇫🇷 法国 | trojan-1853348743-45"
-      - "🇫🇷 法国 | trojan-1827148954-46"
-      - "🇫🇷 法国 | trojan-1827148859-47"
-      - "🇫🇷 法国 | trojan-1827149560-48"
-      - "🇫🇷 法国 | trojan-1857007066-49"
-      - "🇳🇱 荷兰 | trojan-1940455323-50"
-      - "🇫🇷 法国 | trojan-1939844054-51"
-      - "🇳🇱 荷兰 | trojan-1939845059-52"
-      - "🇳🇱 荷兰 | trojan-1827188168-53"
-      - "🇯🇵 日本 | vless-1831081766-54"
-      - "🇯🇵 日本 | vless-1854335913-55"
-      - "vless-1843512959-56"
-      - "vmess-1827159661-57"
-      - "🇫🇷 法国 | trojan-1853462719-58"
-      - "🇫🇷 法国 | trojan-1939845073-59"
-      - "🇫🇷 法国 | trojan-1853491995-60"
-      - "🇫🇷 法国 | trojan-1853461582-61"
-      - "🇫🇷 法国 | trojan-1827149109-62"
-      - "🇳🇱 荷兰 | trojan-1947413506-63"
-      - "🇳🇱 荷兰 | trojan-1827188005-64"
-      - "🇫🇷 法国 | trojan-1944218170-65"
-      - "trojan-1828472626-66"
-      - "🇳🇱 荷兰 | NLD-67"
-      - "🇳🇱 荷兰 | NLD-68"
-      - "🇯🇵 日本 | vless-1910526407-69"
-      - "🇯🇵 日本 | vless-1828654076-70"
-      - "🇯🇵 日本 | vless-1921748885-71"
-      - "vless-1946224541-72"
-      - "🇯🇵 日本 | vless-1827962637-73"
-      - "🇫🇷 法国 | trojan-1894622732-74"
-      - "🇫🇷 法国 | trojan-1827938592-75"
-      - "trojan-1944218172-76"
-      - "🇳🇱 荷兰 | trojan-1937399876-77"
-      - "🇳🇱 荷兰 | NLD-78"
-      - "vmess-1827159639-79"
-      - "🇺🇸 美国 | trojan-1827955817-80"
-      - "vless-1869872045-81"
-      - "vless-1891839087-82"
-      - "vless-1828373732-83"
-      - "vless-1853462782-84"
-      - "🇺🇸 美国 | vless-1879373946-85"
-      - "🇺🇸 美国 | vless-1853350171-86"
-      - "🇺🇸 美国 | vless-1854038780-87"
-      - "🇺🇸 美国 | vless-1827319616-88"
-      - "vless-1828293967-89"
-      - "🇺🇸 美国 | vless-1854336874-90"
-      - "vless-1853462750-91"
-      - "🇺🇸 美国 | vless-1883549617-92"
-      - "🇺🇸 美国 | vless-1891858676-93"
-      - "vless-1827147089-94"
-      - "🇺🇸 美国 | vless-1827162772-95"
-      - "vless-1853340497-96"
-      - "vless-1828149368-97"
-      - "vless-1828293988-98"
-      - "🇺🇸 美国 | vless-1944902761-99"
-      - "vmess-1827160359-100"
+      - "🇺🇸 美国 | USA-1"
+      - "🇺🇸 美国 | USA-2"
+      - "🇯🇵 日本 | vless-1832764144-3"
+      - "🇯🇵 日本 | vless-1828374447-4"
+      - "🇯🇵 日本 | vless-1910526407-5"
+      - "🇯🇵 日本 | vless-1853476976-6"
+      - "🇯🇵 日本 | vless-1831066899-7"
+      - "🇯🇵 日本 | vless-1867102735-8"
+      - "🇯🇵 日本 | vless-1853972214-9"
+      - "🇯🇵 日本 | vless-1863474247-10"
+      - "🇯🇵 日本 | vless-1863464818-11"
+      - "🇯🇵 日本 | vless-1832764134-12"
+      - "🇯🇵 日本 | vless-1856199614-13"
+      - "🇯🇵 日本 | vless-1921748885-14"
+      - "🇯🇵 日本 | vless-1827151410-15"
+      - "🇯🇵 日本 | vless-1927185301-16"
+      - "🇯🇵 日本 | vless-1947014531-17"
+      - "🇯🇵 日本 | vless-1831072390-18"
+      - "🇯🇵 日本 | vless-1827152273-19"
+      - "🇯🇵 日本 | vless-1856200577-20"
+      - "🇯🇵 日本 | vless-1863440028-21"
+      - "🇯🇵 日本 | vless-1832764138-22"
+      - "🇺🇸 美国 | vless-1947389016-23"
+      - "🇯🇵 日本 | vmess-1947375789-24"
+      - "🇯🇵 日本 | vless-1946894790-25"
+      - "🇯🇵 日本 | vless-1863440034-26"
+      - "🇯🇵 日本 | vless-1863468525-27"
+      - "🇺🇸 美国 | trojan-1875022971-28"
+      - "🇯🇵 日本 | vless-1827962637-29"
+      - "🇯🇵 日本 | vmess-1907162640-30"
+      - "🇯🇵 日本 | vless-1831081766-31"
+      - "🇯🇵 日本 | vless-1854335913-32"
+      - "🇺🇸 美国 | trojan-1877412058-33"
+      - "🇺🇸 美国 | vless-1854341788-34"
+      - "🇺🇸 美国 | vless-1853340242-35"
+      - "🇺🇸 美国 | trojan-1943481639-36"
+      - "🇯🇵 日本 | vless-1884771865-37"
+      - "🇺🇸 美国 | trojan-1943021612-38"
+      - "🇯🇵 日本 | vless-1863476159-39"
+      - "🇺🇸 美国 | trojan-1941512533-40"
+      - "🇺🇸 美国 | trojan-1939845099-41"
+      - "🇺🇸 美国 | trojan-1941512524-42"
+      - "🇯🇵 日本 | vless-1827152152-43"
+      - "🇯🇵 日本 | vless-1828654076-44"
+      - "🇯🇵 日本 | vless-1832764140-45"
+      - "🇺🇸 美国 | trojan-1929965354-46"
+      - "🇺🇸 美国 | trojan-1940485917-47"
+      - "🇺🇸 美国 | trojan-1935007688-48"
+      - "🇺🇸 美国 | trojan-1938560222-49"
+      - "🇺🇸 美国 | trojan-1933715123-50"
+      - "🇺🇸 美国 | trojan-1929965351-51"
+      - "🇺🇸 美国 | trojan-1929965347-52"
+      - "🇺🇸 美国 | USA-53"
+      - "🇺🇸 美国 | vless-1888152403-54"
+      - "🇺🇸 美国 | vless-1850140815-55"
+      - "🇺🇸 美国 | trojan-1946215896-56"
+      - "🇺🇸 美国 | trojan-1935612269-57"
+      - "🇺🇸 美国 | trojan-1935007685-58"
+      - "🇺🇸 美国 | trojan-1930077586-59"
+      - "🇺🇸 美国 | trojan-1929965329-60"
+      - "🇺🇸 美国 | vless-1947501567-61"
+      - "🇺🇸 美国 | trojan-1935007690-62"
+      - "🇺🇸 美国 | trojan-1938557333-63"
+      - "🇺🇸 美国 | trojan-1940485908-64"
+      - "🇺🇸 美国 | vless-1945992008-65"
+      - "🇺🇸 美国 | vless-1883103905-66"
+      - "🇺🇸 美国 | trojan-1849374991-67"
+      - "🇺🇸 美国 | trojan-1943754366-68"
+      - "🇺🇸 美国 | trojan-1929965340-69"
+      - "🇺🇸 美国 | trojan-1935796418-70"
+      - "🇺🇸 美国 | trojan-1931858183-71"
+      - "🇹🇼 台湾 | vless-1944434951-72"
+      - "🇺🇸 美国 | vless-1944902761-73"
+      - "🇨🇦 加拿大 | trojan-1939845057-74"
+      - "🇨🇦 加拿大 | trojan-1939845081-75"
+      - "🇨🇦 加拿大 | trojan-1947400782-76"
+      - "🇨🇦 加拿大 | trojan-1939845075-77"
+      - "🇨🇦 加拿大 | trojan-1939845055-78"
+      - "🇨🇦 加拿大 | trojan-1943481635-79"
+      - "🇺🇸 美国 | trojan-1942154526-80"
+      - "🇯🇵 日本 | vless-1947401655-81"
+      - "🇺🇸 美国 | trojan-1947502359-82"
+      - "🇺🇸 美国 | trojan-1941512529-83"
+      - "🇺🇸 美国 | trojan-1944436566-84"
+      - "🇺🇸 美国 | trojan-1941064101-85"
+      - "🇺🇸 美国 | trojan-1940466732-86"
+      - "🇺🇸 美国 | trojan-1940466747-87"
+      - "🇺🇸 美国 | trojan-1933715116-88"
+      - "🇺🇸 美国 | trojan-1827955817-89"
+      - "🇺🇸 美国 | vless-1879373946-90"
+      - "🇺🇸 美国 | vless-1827319616-91"
+      - "🇺🇸 美国 | vless-1854336874-92"
+      - "🇺🇸 美国 | vless-1854038780-93"
+      - "🇨🇦 加拿大 | vless-1827155346-94"
+      - "🇨🇦 加拿大 | vless-1828036218-95"
+      - "🇺🇸 美国 | vless-1827162772-96"
+      - "🇺🇸 美国 | vless-1883549617-97"
+      - "🇺🇸 美国 | vless-1891858676-98"
+      - "🇲🇽 墨西哥 | trojan-1929965361-99"
+      - "🇺🇸 美国 | vless-1853350171-100"
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-      - "🇬🇧 英国 | trojan-1946894181-1"
-      - "🇩🇪 德国 | DEU-2"
-      - "🇩🇪 德国 | DEU-3"
-      - "🇳🇱 荷兰 | NLD-4"
-      - "🇳🇱 荷兰 | NLD-5"
-      - "🇺🇸 美国 | USA-6"
-      - "🇺🇸 美国 | USA-7"
-      - "🇯🇵 日本 | vless-1827151410-8"
-      - "🇯🇵 日本 | vless-1884771865-9"
-      - "vless-1941532350-10"
-      - "🇯🇵 日本 | vless-1927185301-11"
-      - "vless-1853654571-12"
-      - "🇯🇵 日本 | vless-1832764144-13"
-      - "🇯🇵 日本 | vless-1947014531-14"
-      - "🇯🇵 日本 | vless-1828374447-15"
-      - "🇯🇵 日本 | vless-1831072390-16"
-      - "🇯🇵 日本 | vless-1863476159-17"
-      - "🇯🇵 日本 | vless-1827152273-18"
-      - "🇯🇵 日本 | vless-1853476976-19"
-      - "🇯🇵 日本 | vless-1831066899-20"
-      - "🇯🇵 日本 | vless-1856200577-21"
-      - "🇯🇵 日本 | vless-1863440028-22"
-      - "🇯🇵 日本 | vless-1867102735-23"
-      - "🇯🇵 日本 | vless-1853972214-24"
-      - "🇯🇵 日本 | vless-1832764138-25"
-      - "🇯🇵 日本 | vless-1863474247-26"
-      - "🇯🇵 日本 | vless-1827152152-27"
-      - "🇺🇸 美国 | vless-1947389016-28"
-      - "🇯🇵 日本 | vmess-1947375789-29"
-      - "vless-1828374596-30"
-      - "🇯🇵 日本 | vless-1946894790-31"
-      - "🇯🇵 日本 | vless-1863464818-32"
-      - "🇯🇵 日本 | vless-1863440034-33"
-      - "🇯🇵 日本 | vless-1863468525-34"
-      - "vless-1863440009-35"
-      - "🇯🇵 日本 | vless-1832764134-36"
-      - "🇳🇱 荷兰 | trojan-1923819684-37"
-      - "🇫🇷 法国 | trojan-1934984141-38"
-      - "🇫🇷 法国 | trojan-1858673309-39"
-      - "🇯🇵 日本 | vless-1856199614-40"
-      - "🇯🇵 日本 | vless-1832764140-41"
-      - "🇯🇵 日本 | vmess-1907162640-42"
-      - "vmess-1938957366-43"
-      - "🇫🇷 法国 | trojan-1908518028-44"
-      - "🇫🇷 法国 | trojan-1853348743-45"
-      - "🇫🇷 法国 | trojan-1827148954-46"
-      - "🇫🇷 法国 | trojan-1827148859-47"
-      - "🇫🇷 法国 | trojan-1827149560-48"
-      - "🇫🇷 法国 | trojan-1857007066-49"
-      - "🇳🇱 荷兰 | trojan-1940455323-50"
-      - "🇫🇷 法国 | trojan-1939844054-51"
-      - "🇳🇱 荷兰 | trojan-1939845059-52"
-      - "🇳🇱 荷兰 | trojan-1827188168-53"
-      - "🇯🇵 日本 | vless-1831081766-54"
-      - "🇯🇵 日本 | vless-1854335913-55"
-      - "vless-1843512959-56"
-      - "vmess-1827159661-57"
-      - "🇫🇷 法国 | trojan-1853462719-58"
-      - "🇫🇷 法国 | trojan-1939845073-59"
-      - "🇫🇷 法国 | trojan-1853491995-60"
-      - "🇫🇷 法国 | trojan-1853461582-61"
-      - "🇫🇷 法国 | trojan-1827149109-62"
-      - "🇳🇱 荷兰 | trojan-1947413506-63"
-      - "🇳🇱 荷兰 | trojan-1827188005-64"
-      - "🇫🇷 法国 | trojan-1944218170-65"
-      - "trojan-1828472626-66"
-      - "🇳🇱 荷兰 | NLD-67"
-      - "🇳🇱 荷兰 | NLD-68"
-      - "🇯🇵 日本 | vless-1910526407-69"
-      - "🇯🇵 日本 | vless-1828654076-70"
-      - "🇯🇵 日本 | vless-1921748885-71"
-      - "vless-1946224541-72"
-      - "🇯🇵 日本 | vless-1827962637-73"
-      - "🇫🇷 法国 | trojan-1894622732-74"
-      - "🇫🇷 法国 | trojan-1827938592-75"
-      - "trojan-1944218172-76"
-      - "🇳🇱 荷兰 | trojan-1937399876-77"
-      - "🇳🇱 荷兰 | NLD-78"
-      - "vmess-1827159639-79"
-      - "🇺🇸 美国 | trojan-1827955817-80"
+      - "🇺🇸 美国 | USA-1"
+      - "🇺🇸 美国 | USA-2"
+      - "🇯🇵 日本 | vless-1832764144-3"
+      - "🇯🇵 日本 | vless-1828374447-4"
+      - "🇯🇵 日本 | vless-1910526407-5"
+      - "🇯🇵 日本 | vless-1853476976-6"
+      - "🇯🇵 日本 | vless-1831066899-7"
+      - "🇯🇵 日本 | vless-1867102735-8"
+      - "🇯🇵 日本 | vless-1853972214-9"
+      - "🇯🇵 日本 | vless-1863474247-10"
+      - "🇯🇵 日本 | vless-1863464818-11"
+      - "🇯🇵 日本 | vless-1832764134-12"
+      - "🇯🇵 日本 | vless-1856199614-13"
+      - "🇯🇵 日本 | vless-1921748885-14"
+      - "🇯🇵 日本 | vless-1827151410-15"
+      - "🇯🇵 日本 | vless-1927185301-16"
+      - "🇯🇵 日本 | vless-1947014531-17"
+      - "🇯🇵 日本 | vless-1831072390-18"
+      - "🇯🇵 日本 | vless-1827152273-19"
+      - "🇯🇵 日本 | vless-1856200577-20"
+      - "🇯🇵 日本 | vless-1863440028-21"
+      - "🇯🇵 日本 | vless-1832764138-22"
+      - "🇺🇸 美国 | vless-1947389016-23"
+      - "🇯🇵 日本 | vmess-1947375789-24"
+      - "🇯🇵 日本 | vless-1946894790-25"
+      - "🇯🇵 日本 | vless-1863440034-26"
+      - "🇯🇵 日本 | vless-1863468525-27"
+      - "🇺🇸 美国 | trojan-1875022971-28"
+      - "🇯🇵 日本 | vless-1827962637-29"
+      - "🇯🇵 日本 | vmess-1907162640-30"
+      - "🇯🇵 日本 | vless-1831081766-31"
+      - "🇯🇵 日本 | vless-1854335913-32"
+      - "🇺🇸 美国 | trojan-1877412058-33"
+      - "🇺🇸 美国 | vless-1854341788-34"
+      - "🇺🇸 美国 | vless-1853340242-35"
+      - "🇺🇸 美国 | trojan-1943481639-36"
+      - "🇯🇵 日本 | vless-1884771865-37"
+      - "🇺🇸 美国 | trojan-1943021612-38"
+      - "🇯🇵 日本 | vless-1863476159-39"
+      - "🇺🇸 美国 | trojan-1941512533-40"
+      - "🇺🇸 美国 | trojan-1939845099-41"
+      - "🇺🇸 美国 | trojan-1941512524-42"
+      - "🇯🇵 日本 | vless-1827152152-43"
+      - "🇯🇵 日本 | vless-1828654076-44"
+      - "🇯🇵 日本 | vless-1832764140-45"
+      - "🇺🇸 美国 | trojan-1929965354-46"
+      - "🇺🇸 美国 | trojan-1940485917-47"
+      - "🇺🇸 美国 | trojan-1935007688-48"
+      - "🇺🇸 美国 | trojan-1938560222-49"
+      - "🇺🇸 美国 | trojan-1933715123-50"
+      - "🇺🇸 美国 | trojan-1929965351-51"
+      - "🇺🇸 美国 | trojan-1929965347-52"
+      - "🇺🇸 美国 | USA-53"
+      - "🇺🇸 美国 | vless-1888152403-54"
+      - "🇺🇸 美国 | vless-1850140815-55"
+      - "🇺🇸 美国 | trojan-1946215896-56"
+      - "🇺🇸 美国 | trojan-1935612269-57"
+      - "🇺🇸 美国 | trojan-1935007685-58"
+      - "🇺🇸 美国 | trojan-1930077586-59"
+      - "🇺🇸 美国 | trojan-1929965329-60"
+      - "🇺🇸 美国 | vless-1947501567-61"
+      - "🇺🇸 美国 | trojan-1935007690-62"
+      - "🇺🇸 美国 | trojan-1938557333-63"
+      - "🇺🇸 美国 | trojan-1940485908-64"
+      - "🇺🇸 美国 | vless-1945992008-65"
+      - "🇺🇸 美国 | vless-1883103905-66"
+      - "🇺🇸 美国 | trojan-1849374991-67"
+      - "🇺🇸 美国 | trojan-1943754366-68"
+      - "🇺🇸 美国 | trojan-1929965340-69"
+      - "🇺🇸 美国 | trojan-1935796418-70"
+      - "🇺🇸 美国 | trojan-1931858183-71"
+      - "🇹🇼 台湾 | vless-1944434951-72"
+      - "🇺🇸 美国 | vless-1944902761-73"
+      - "🇨🇦 加拿大 | trojan-1939845057-74"
+      - "🇨🇦 加拿大 | trojan-1939845081-75"
+      - "🇨🇦 加拿大 | trojan-1947400782-76"
+      - "🇨🇦 加拿大 | trojan-1939845075-77"
+      - "🇨🇦 加拿大 | trojan-1939845055-78"
+      - "🇨🇦 加拿大 | trojan-1943481635-79"
+      - "🇺🇸 美国 | trojan-1942154526-80"
   - name: 🐟 漏网之鱼
     type: select
     proxies:
