@@ -27,10 +27,10 @@ jobs:
         run: python3 update_nodes.py
       - name: Commit if changed
         run: |
-          if git status --porcelain sub.yaml sub.txt | grep -q .; then
+          if git status --porcelain sub.yaml sub.txt config.yaml | grep -q .; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add sub.yaml sub.txt
+            git add sub.yaml sub.txt config.yaml
             git commit -m "chore: update free nodes"
             git push
           else
