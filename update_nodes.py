@@ -125,7 +125,7 @@ def parse_node(link):
                     "server": data["add"], "port": int(data["port"]),
                     "uuid": data["id"], "alterId": int(data.get("aid", 0)),
                     "cipher": "auto", "tls": data.get("tls") == "tls",
-                    "network": data.get("net", "tcp"),
+                    "network": normalize_network(data.get("net", "tcp")),
                     "ws-path": data.get("path", "/"),
                     "ws-host": data.get("host", ""),
                     "ws-headers": {"Host": data["host"]} if data.get("host") else {},
@@ -152,7 +152,7 @@ def parse_node(link):
                 node["reality"] = node["security"] == "reality"
                 node["public_key"] = q("pbk", "")
                 node["short_id"] = q("sid", "")
-                node["network"] = q("type", "tcp")
+                node["network"] = normalize_network(q("type", "tcp"))
                 node["servername"] = q("sni", "")
                 node["flow"] = q("flow", "")
                 node["fingerprint"] = q("fp", "")
@@ -166,7 +166,7 @@ def parse_node(link):
                 node["password"] = parsed.username
                 node["sni"] = q("sni", "")
                 # trojan 两种写法都要兼容：标准 type=ws/grpc，以及老式的 ws=1&wspath=
-                node["network"] = q("type", "ws" if q("ws") == "1" else "tcp")
+                node["network"] = normalize_network(q("type", "ws" if q("ws") == "1" else "tcp"))
                 node["ws-path"] = q("path", "") or q("wspath", "/")
                 node["ws-host"] = q("host", "")
                 node["grpc-service-name"] = q("serviceName", "")
@@ -220,12 +220,29 @@ def _xhttp_opts(p):
     return f", xhttp-opts: {{path: {yaml_escape(p.get('xhttp-path', '/'))}}}"
 
 
+# Clash/mihomo 不接受的字段会让整份配置导入失败，所以这里要归一化：
+#   - network=raw（原始链接里表示裸 TCP）在 Clash 里不是合法 network，
+#     必须写成 tcp；这是上一版“配置无法使用”最可能的直接原因。
+#   - client-fingerprint 只保留 Clash 认识的值，unsafe 之类直接丢掉。
+#   - alpn 在 Clash 里是列表，h2,http/1.1 要拆成 ["h2", "http/1.1"]。
+VALID_FINGERPRINTS = {"chrome", "firefox", "safari", "ios", "android", "edge", "360", "qq", "random"}
+
+
+def normalize_network(net):
+    if net in ("raw", "none", "", None):
+        return "tcp"
+    return net
+
+
 def _extra_tls(p):
     out = ""
-    if p.get("fingerprint"):
-        out += f", client-fingerprint: {yaml_escape(p['fingerprint'])}"
+    fp = p.get("fingerprint", "")
+    if fp in VALID_FINGERPRINTS:
+        out += f", client-fingerprint: {yaml_escape(fp)}"
     if p.get("alpn"):
-        out += f", alpn: {yaml_escape(p['alpn'])}"
+        parts = [x.strip() for x in str(p["alpn"]).split(",") if x.strip()]
+        if parts:
+            out += ", alpn: [" + ", ".join(yaml_escape(x) for x in parts) + "]"
     return out
 
 
