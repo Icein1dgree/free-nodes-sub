@@ -47,11 +47,11 @@ SOURCES = [
     # 当时拉到 62 条，本脚本可解析 58 条（vless/trojan/vmess/ss）；
     # 其余 4 条多为 hy2/tuic 等本版暂不支持的协议，需扩展解析器才进订阅。
     "https://raw.githubusercontent.com/snakem982/proxypool/main/source/v2ray-2.txt",
-  # 多来源 2026-11-01 实测：Au1rxx/free-vpn-subscriptions v2ray 纯链接
-  # 当时拉到 1751 条，可解析 1580 条，去重后 523 条；
-  # 作者称每小时刷新、每个节点做过真实 HTTP 代理验证。
-  # 脚本会在所有来源之间去重（服务器:端口:协议:凭据），再统一测速排序。
-  "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",  
+    # 多来源 2026-11-01 实测：Au1rxx/free-vpn-subscriptions v2ray 纯链接
+    # 当时拉到 1751 条，可解析 1580 条，去重后 523 条；
+    # 作者称每小时刷新、每个节点做过真实 HTTP 代理验证。
+    # 脚本会在所有来源之间去重（服务器:端口:协议:凭据），再统一测速排序。
+    "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
     # 备选（已验证文件存在、量大，但它是完整 Clash YAML，不是纯链接，
     #  直接喂给本版会解析为 0，需要另加 YAML proxies 解析才可用）：
     # "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.meta.yml",
@@ -140,7 +140,13 @@ def parse_node(link):
                     "link": link}
             if proto == "vless":
                 node["uuid"] = parsed.username
-                node["tls"] = q("security") == "tls"
+                # Reality 在技术上是 TLS 的一种伪装形式，握手看起来像访问真实网站，
+                # 不能把它当成明文；之前版本把 reality 算成 tls=False 是错的，这里修正。
+                node["security"] = q("security", "")
+                node["tls"] = node["security"] in ("tls", "reality")
+                node["reality"] = node["security"] == "reality"
+                node["public_key"] = q("pbk", "")
+                node["short_id"] = q("sid", "")
                 node["network"] = q("type", "tcp")
                 node["servername"] = q("sni", "")
             else:
@@ -177,13 +183,37 @@ def proxy_to_yaml(p):
                 f"network: {p.get('network', 'tcp')}, ws-path: {yaml_escape(p.get('ws-path', '/'))}}}")
     if p["type"] == "vless":
         tls = "true" if p.get("tls") else "false"
-        return (f"  - {{name: {n}, type: vless, server: {p['server']}, port: {p['port']}, "
+        base = (f"  - {{name: {n}, type: vless, server: {p['server']}, port: {p['port']}, "
                 f"uuid: {p['uuid']}, tls: {tls}, network: {p.get('network', 'tcp')}, "
-                f"servername: {yaml_escape(p.get('servername', ''))}}}")
+                f"servername: {yaml_escape(p.get('servername', ''))}")
+        if p.get("reality"):
+            base += (f", reality-opts: {{public-key: {yaml_escape(p.get('public_key', ''))}, "
+                     f"short-id: {yaml_escape(p.get('short_id', ''))}}}")
+        return base + "}"
     if p["type"] == "trojan":
         return (f"  - {{name: {n}, type: trojan, server: {p['server']}, port: {p['port']}, "
                 f"password: {yaml_escape(p['password'])}, sni: {yaml_escape(p.get('sni', ''))}}}")
     return None
+
+
+# 大陆使用时的审查风险过滤（2026-11-01 用户要求）：
+#   保留：trojan（协议本身走 TLS）、vless tls、vless reality、vmess tls
+#   去除：ss（无 TLS 层，流量特征易被识别）、vmess 明文、vless security=none/false/空
+# 注意：这只是降低被识别的概率，不是保证不被封；节点本身仍可能被封 IP/域名。
+DROP_RISKY = True
+
+
+def is_risky(node):
+    if not DROP_RISKY:
+        return False
+    if node["type"] == "ss":
+        return True
+    if node["type"] == "vmess":
+        return not node.get("tls")
+    if node["type"] == "vless":
+        return node.get("security", "") not in ("tls", "reality")
+    # trojan 协议本身走 TLS，保留
+    return False
 
 
 def main():
@@ -191,6 +221,7 @@ def main():
         log("SOURCES 为空：请先填入公开订阅地址，本次不覆盖旧订阅。")
         return 2
     seen, nodes = set(), []
+    risky = 0
     for url in SOURCES:
         try:
             links = split_links(fetch_text(url))
@@ -202,13 +233,16 @@ def main():
             node = parse_node(link)
             if not node:
                 continue
+            if is_risky(node):
+                risky += 1
+                continue
             key = (node["server"], node["port"], node["type"],
                    node.get("uuid") or node.get("password"))
             if key in seen:
                 continue
             seen.add(key)
             nodes.append(node)
-    log(f"解析后去重: {len(nodes)} 个")
+    log(f"解析后去重: {len(nodes)} 个，因审查风险过滤掉: {risky} 个")
     if not nodes:
         log("无可用节点，不覆盖旧订阅。")
         return 3
