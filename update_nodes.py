@@ -47,6 +47,12 @@ SOURCES = [
     # 当时拉到 62 条，本脚本可解析 58 条（vless/trojan/vmess/ss）；
     # 其余 4 条多为 hy2/tuic 等本版暂不支持的协议，需扩展解析器才进订阅。
     "https://raw.githubusercontent.com/snakem982/proxypool/main/source/v2ray-2.txt",
+  # 多来源 2026-11-01 实测：Au1rxx/free-vpn-subscriptions v2ray 纯链接
+  # 当时拉到 1751 条，可解析 1580 条，去重后 523 条；
+  # 作者称每小时刷新、每个节点做过真实 HTTP 代理验证。
+  # 脚本会在所有来源之间去重（服务器:端口:协议:凭据），再统一测速排序。
+  "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
+  
     # 备选（已验证文件存在、量大，但它是完整 Clash YAML，不是纯链接，
     #  直接喂给本版会解析为 0，需要另加 YAML proxies 解析才可用）：
     # "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.meta.yml",
