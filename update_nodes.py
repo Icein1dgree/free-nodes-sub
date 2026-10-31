@@ -449,8 +449,38 @@ def fetch_country_mapping():
     return mapping
 
 
-def apply_region_names(nodes):
-    mapping = fetch_country_mapping()
+# 地区范围（2026-11-01 用户要求：只留东亚、东南亚、北美，其他不要）
+# 东亚：JP 日本、KR 韩国、TW 台湾、HK 香港（ mainland CN 不算：国内节点出不了墙，还多一层风险）
+# 东南亚：SG 新加坡、MY 马来西亚、TH 泰国、VN 越南、ID 印尼、PH 菲律宾、KH 柬埔寨、LA 老挝、MM 缅甸
+# 北美：US 美国、CA 加拿大、MX 墨西哥
+ALLOWED_COUNTRIES = {"JP", "KR", "TW", "HK", "SG", "MY", "TH", "VN", "ID", "PH", "KH", "LA", "MM", "US", "CA", "MX"}
+# proxypool 名字里的三字码 -> 二字码（只列常见，够判断是不是目标地区就行）
+ISO3_TO_ISO2 = {"JPN": "JP", "KOR": "KR", "TWN": "TW", "HKG": "HK", "CHN": "CN",
+                "SGP": "SG", "MYS": "MY", "THA": "TH", "VNM": "VN", "IDN": "ID", "PHL": "PH",
+                "KHM": "KH", "LAO": "LA", "MMR": "MM", "USA": "US", "CAN": "CA", "MEX": "MX",
+                "DEU": "DE", "NLD": "NL", "FRA": "FR", "GBR": "GB", "ITA": "IT", "ESP": "ES",
+                "TUR": "TR", "POL": "PL", "RUS": "RU", "BRA": "BR", "AUS": "AU"}
+
+
+def region_code(node, mapping):
+    # 1) Au1rxx 国家文件匹配（服务器:端口:协议）
+    cc = mapping.get((node["server"], node["port"], node["type"]))
+    if cc:
+        return cc
+    # 2) 名字里的中文地区名（主要是 proxypool）
+    for code, (flag, cn) in COUNTRY_NAMES.items():
+        if cn in node["name"]:
+            return code
+    # 3) 名字末尾的三字码，如 "🇺🇸 美国 | USA"
+    tail = node["name"].split("|")[-1].strip().upper()
+    if tail in ISO3_TO_ISO2:
+        return ISO3_TO_ISO2[tail]
+    return None
+
+
+def apply_region_names(nodes, mapping=None):
+    if mapping is None:
+        mapping = fetch_country_mapping()
     if not mapping:
         return 0
     changed = 0
@@ -511,14 +541,27 @@ def main():
             if ms is not None and ms <= MAX_LATENCY_MS:
                 node["latency_ms"] = round(ms)
                 alive.append(node)
-    alive.sort(key=lambda x: x["latency_ms"])
-    alive = alive[:MAX_NODES]
     log(f"TCP 存活且延迟 <= {MAX_LATENCY_MS}ms: {len(alive)} 个")
     if not alive:
         log("筛选后为空，不覆盖旧订阅。")
         return 4
 
-    apply_region_names(alive)
+    # 地区过滤必须在取前 100 之前做，否则 GitHub 跑道（美国）测出的延迟会把
+    # 欧洲节点排前面、把亚洲节点挤出前 100——这也是之前“基本用不了”的一个原因：
+    # 从中国看，欧洲节点本来就远，还占了名额。
+    # 先补地区名、再只留东亚/东南亚/北美、最后按延迟取前 100；地区未知的也去掉，
+    # 因为无法证明它在目标地区，不编造地区。
+    mapping = fetch_country_mapping()
+    apply_region_names(alive, mapping)
+    before_region = len(alive)
+    alive = [n for n in alive if region_code(n, mapping) in ALLOWED_COUNTRIES]
+    log(f"地区过滤: {before_region} -> {len(alive)} 个（只留东亚/东南亚/北美）")
+    if not alive:
+        log("地区过滤后为空，不覆盖旧订阅。")
+        return 4
+    alive.sort(key=lambda x: x["latency_ms"])
+    alive = alive[:MAX_NODES]
+    log(f"最终保留: {len(alive)} 个")
     for i, node in enumerate(alive, 1):
         node["name"] = f"{node['name']}-{i}" if alive else node["name"]
 
