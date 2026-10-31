@@ -127,7 +127,12 @@ def parse_node(link):
                     "cipher": "auto", "tls": data.get("tls") == "tls",
                     "network": data.get("net", "tcp"),
                     "ws-path": data.get("path", "/"),
+                    "ws-host": data.get("host", ""),
                     "ws-headers": {"Host": data["host"]} if data.get("host") else {},
+                    "servername": data.get("sni", "") or data.get("host", ""),
+                    "fingerprint": data.get("fp", ""),
+                    "alpn": data.get("alpn", ""),
+                    "grpc-service-name": data.get("serviceName", ""),
                     "link": link}
         if link.startswith(("vless://", "trojan://")):
             proto = "vless" if link.startswith("vless") else "trojan"
@@ -149,9 +154,25 @@ def parse_node(link):
                 node["short_id"] = q("sid", "")
                 node["network"] = q("type", "tcp")
                 node["servername"] = q("sni", "")
+                node["flow"] = q("flow", "")
+                node["fingerprint"] = q("fp", "")
+                node["alpn"] = q("alpn", "")
+                node["ws-path"] = q("path", "/")
+                node["ws-host"] = q("host", "")
+                node["grpc-service-name"] = q("serviceName", "")
+                node["xhttp-path"] = q("path", "/")
+                node["xhttp-mode"] = q("mode", "")
             else:
                 node["password"] = parsed.username
                 node["sni"] = q("sni", "")
+                # trojan 两种写法都要兼容：标准 type=ws/grpc，以及老式的 ws=1&wspath=
+                node["network"] = q("type", "ws" if q("ws") == "1" else "tcp")
+                node["ws-path"] = q("path", "") or q("wspath", "/")
+                node["ws-host"] = q("host", "")
+                node["grpc-service-name"] = q("serviceName", "")
+                node["alpn"] = q("alpn", "")
+                node["fingerprint"] = q("fp", "")
+                node["skip-cert-verify"] = q("allowInsecure") == "1" or q("skip-cert-verify") == "true"
             return node
     except Exception:
         return None
@@ -171,6 +192,43 @@ def yaml_escape(s):
     return '"' + str(s).replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
+def _ws_opts(p):
+    if p.get("network") != "ws":
+        return ""
+    # WS 握手里 Host 很关键：原链接没给 host 时，用 sni/servername 兜底，
+    # 否则 FlClash 会拿服务器 IP 当 Host，握手直接失败——这是上一版“一个都不能用”
+    # 的主要原因之一。
+    host = p.get("ws-host", "") or p.get("servername", "") or p.get("sni", "")
+    path = p.get("ws-path", "/") or "/"
+    if host:
+        return f", ws-opts: {{path: {yaml_escape(path)}, headers: {{Host: {yaml_escape(host)}}}}}"
+    return f", ws-opts: {{path: {yaml_escape(path)}}}"
+
+
+def _grpc_opts(p):
+    if p.get("network") != "grpc":
+        return ""
+    return f", grpc-opts: {{grpc-service-name: {yaml_escape(p.get('grpc-service-name', ''))}}}"
+
+
+def _xhttp_opts(p):
+    if p.get("network") != "xhttp":
+        return ""
+    mode = p.get("xhttp-mode", "")
+    if mode:
+        return f", xhttp-opts: {{path: {yaml_escape(p.get('xhttp-path', '/'))}, mode: {yaml_escape(mode)}}}"
+    return f", xhttp-opts: {{path: {yaml_escape(p.get('xhttp-path', '/'))}}}"
+
+
+def _extra_tls(p):
+    out = ""
+    if p.get("fingerprint"):
+        out += f", client-fingerprint: {yaml_escape(p['fingerprint'])}"
+    if p.get("alpn"):
+        out += f", alpn: {yaml_escape(p['alpn'])}"
+    return out
+
+
 def proxy_to_yaml(p):
     n = yaml_escape(p["name"])
     if p["type"] == "ss":
@@ -178,21 +236,34 @@ def proxy_to_yaml(p):
                 f"cipher: {p['cipher']}, password: {yaml_escape(p['password'])}}}")
     if p["type"] == "vmess":
         tls = "true" if p.get("tls") else "false"
-        return (f"  - {{name: {n}, type: vmess, server: {p['server']}, port: {p['port']}, "
+        base = (f"  - {{name: {n}, type: vmess, server: {p['server']}, port: {p['port']}, "
                 f"uuid: {p['uuid']}, alterId: {p.get('alterId', 0)}, cipher: auto, tls: {tls}, "
-                f"network: {p.get('network', 'tcp')}, ws-path: {yaml_escape(p.get('ws-path', '/'))}}}")
+                f"network: {p.get('network', 'tcp')}")
+        if p.get("servername"):
+            base += f", servername: {yaml_escape(p['servername'])}"
+        base += _ws_opts(p) + _grpc_opts(p) + _xhttp_opts(p) + _extra_tls(p)
+        return base + "}"
     if p["type"] == "vless":
         tls = "true" if p.get("tls") else "false"
         base = (f"  - {{name: {n}, type: vless, server: {p['server']}, port: {p['port']}, "
                 f"uuid: {p['uuid']}, tls: {tls}, network: {p.get('network', 'tcp')}, "
                 f"servername: {yaml_escape(p.get('servername', ''))}")
+        if p.get("flow"):
+            base += f", flow: {yaml_escape(p['flow'])}"
+        base += _ws_opts(p) + _grpc_opts(p) + _xhttp_opts(p) + _extra_tls(p)
         if p.get("reality"):
             base += (f", reality-opts: {{public-key: {yaml_escape(p.get('public_key', ''))}, "
                      f"short-id: {yaml_escape(p.get('short_id', ''))}}}")
         return base + "}"
     if p["type"] == "trojan":
-        return (f"  - {{name: {n}, type: trojan, server: {p['server']}, port: {p['port']}, "
-                f"password: {yaml_escape(p['password'])}, sni: {yaml_escape(p.get('sni', ''))}}}")
+        base = (f"  - {{name: {n}, type: trojan, server: {p['server']}, port: {p['port']}, "
+                f"password: {yaml_escape(p['password'])}, sni: {yaml_escape(p.get('sni', ''))}")
+        if p.get("network") and p["network"] != "tcp":
+            base += f", network: {p['network']}"
+        base += _ws_opts(p) + _grpc_opts(p) + _extra_tls(p)
+        if p.get("skip-cert-verify"):
+            base += ", skip-cert-verify: true"
+        return base + "}"
     return None
 
 
@@ -214,6 +285,83 @@ def is_risky(node):
         return node.get("security", "") not in ("tls", "reality")
     # trojan 协议本身走 TLS，保留
     return False
+
+
+# 地区名补全：Au1rxx 的节点名本身是 vless-数字，没有地区。
+# 用它按国家分的文件（output/by-country/clash-XX.yaml）做匹配，
+# 按服务器:端口:协议找到国家，就把国家前缀写进名字。
+# 只取主要国家，102 个全取太重；匹配不到的保留原名，不编造地区。
+COUNTRY_CODES = ["JP", "US", "SG", "HK", "DE", "NL", "KR", "TW", "GB", "FR", "CA", "AU",
+                 "TR", "IN", "PL", "RO", "SE", "FI", "ES", "IT", "CH", "AT", "DK", "NO",
+                 "BR", "MX", "ZA", "TH", "VN", "MY", "ID", "PH",
+                 "AE", "AL", "AM", "AR", "BA", "BE", "BG", "BY", "CL", "CY", "CZ",
+                 "EE", "GR", "HU", "IE", "IL", "IR", "IS", "KZ", "LT", "LV", "MK",
+                 "NZ", "PA", "PT", "RS", "RU", "UA"]
+COUNTRY_NAMES = {
+    "JP": ("🇯🇵", "日本"), "US": ("🇺🇸", "美国"), "SG": ("🇸🇬", "新加坡"),
+    "HK": ("🇭🇰", "香港"), "DE": ("🇩🇪", "德国"), "NL": ("🇳🇱", "荷兰"),
+    "KR": ("🇰🇷", "韩国"), "TW": ("🇹🇼", "台湾"), "GB": ("🇬🇧", "英国"),
+    "FR": ("🇫🇷", "法国"), "CA": ("🇨🇦", "加拿大"), "AU": ("🇦🇺", "澳大利亚"),
+    "TR": ("🇹🇷", "土耳其"), "IN": ("🇮🇳", "印度"), "PL": ("🇵🇱", "波兰"),
+    "RO": ("🇷🇴", "罗马尼亚"), "SE": ("🇸🇪", "瑞典"), "FI": ("🇫🇮", "芬兰"),
+    "ES": ("🇪🇸", "西班牙"), "IT": ("🇮🇹", "意大利"), "CH": ("🇨🇭", "瑞士"),
+    "AT": ("🇦🇹", "奥地利"), "DK": ("🇩🇰", "丹麦"), "NO": ("🇳🇴", "挪威"),
+    "BR": ("🇧🇷", "巴西"), "MX": ("🇲🇽", "墨西哥"), "ZA": ("🇿🇦", "南非"),
+    "TH": ("🇹🇭", "泰国"), "VN": ("🇻🇳", "越南"), "MY": ("🇲🇾", "马来西亚"),
+    "ID": ("🇮🇩", "印尼"), "PH": ("🇵🇭", "菲律宾"),
+}
+
+
+def fetch_country_mapping():
+    mapping = {}
+    for cc in COUNTRY_CODES:
+        try:
+            txt = fetch_text(f"https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/by-country/clash-{cc}.yaml")
+        except Exception as e:
+            log(f"国家文件 {cc} 拉取失败 {e}")
+            continue
+        cur = {}
+        for line in txt.splitlines():
+            s = line.strip()
+            if s.startswith("- name:"):
+                if cur.get("server") and cur.get("port") and cur.get("type"):
+                    mapping.setdefault((cur["server"], cur["port"], cur["type"]), cc)
+                cur = {}
+            elif s.startswith("server:"):
+                cur["server"] = s.split(":", 1)[1].strip().strip('"').strip("'")
+            elif s.startswith("port:"):
+                try:
+                    cur["port"] = int(s.split(":", 1)[1].strip())
+                except Exception:
+                    pass
+            elif s.startswith("type:"):
+                cur["type"] = s.split(":", 1)[1].strip()
+        if cur.get("server") and cur.get("port") and cur.get("type"):
+            mapping.setdefault((cur["server"], cur["port"], cur["type"]), cc)
+    log(f"国家映射: {len(mapping)} 条")
+    return mapping
+
+
+def apply_region_names(nodes):
+    mapping = fetch_country_mapping()
+    if not mapping:
+        return 0
+    changed = 0
+    for node in nodes:
+        name = node["name"]
+        # 已有国旗/中文地区名的（主要是 proxypool）不动
+        if "�" in name or any(cn in name for _, cn in COUNTRY_NAMES.values()):
+            continue
+        cc = mapping.get((node["server"], node["port"], node["type"]))
+        if cc:
+            if cc in COUNTRY_NAMES:
+                flag, cn = COUNTRY_NAMES[cc]
+                node["name"] = f"{flag} {cn} | {name}"
+            else:
+                node["name"] = f"{cc} | {name}"
+            changed += 1
+    log(f"补地区名: {changed} 个")
+    return changed
 
 
 def main():
@@ -263,6 +411,7 @@ def main():
         log("筛选后为空，不覆盖旧订阅。")
         return 4
 
+    apply_region_names(alive)
     for i, node in enumerate(alive, 1):
         node["name"] = f"{node['name']}-{i}" if alive else node["name"]
 
