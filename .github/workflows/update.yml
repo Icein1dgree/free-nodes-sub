@@ -1,0 +1,38 @@
+name: Update free nodes
+
+# GitHub Actions 的 schedule 用 UTC 时间。
+# 分钟是 17，每小时都跑，和之前定的 root crontab 17 * * * * 对应：
+# 北京时间的 :17 和 UTC 的 :17，分钟数是一样的。
+# 注意：定时任务是尽力而为，GitHub 可能会延迟几分钟，不保证分秒不差。
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:  # 手动在 Actions 页点 Run workflow 也能跑一次
+
+permissions:
+  contents: write
+
+# 代替服务器 crontab 里 flock 的防重入：
+# 同一时间只跑一个，新的等旧的跑完，不会互相覆盖 sub.yaml。
+concurrency:
+  group: update-free-nodes
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update nodes
+        run: python3 update_nodes.py
+      - name: Commit if changed
+        run: |
+          if git status --porcelain sub.yaml sub.txt | grep -q .; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add sub.yaml sub.txt
+            git commit -m "chore: update free nodes"
+            git push
+          else
+            echo "No changes, skip commit."
+          fi
