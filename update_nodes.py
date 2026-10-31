@@ -52,6 +52,11 @@ SOURCES = [
     # 作者称每小时刷新、每个节点做过真实 HTTP 代理验证。
     # 脚本会在所有来源之间去重（服务器:端口:协议:凭据），再统一测速排序。
     "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
+    # 2026-11-01 用户要 500 节点：加 fuzhang 明文链接和 awesome-vpn，
+    # 和上面两源去重后非风险节点共 766 条，够凑 500；fuzhang 本身也是公开聚合，
+    # 不是自有节点，见 /proxy/ 页说明。
+    "https://fuzhang.net/proxy/nodes.txt",
+    "https://raw.githubusercontent.com/awesome-vpn/awesome-vpn/master/all",
     # 备选（已验证文件存在、量大，但它是完整 Clash YAML，不是纯链接，
     #  直接喂给本版会解析为 0，需要另加 YAML proxies 解析才可用）：
     # "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.meta.yml",
@@ -63,7 +68,7 @@ OUTPUT_CONFIG = os.environ.get("OUTPUT_CONFIG", "./config.yaml")
 # 筛选阈值（可调）
 CONNECT_TIMEOUT = float(os.environ.get("CONNECT_TIMEOUT", "3"))  # 秒
 MAX_LATENCY_MS = float(os.environ.get("MAX_LATENCY_MS", "3000"))
-MAX_NODES = int(os.environ.get("MAX_NODES", "100"))
+MAX_NODES = int(os.environ.get("MAX_NODES", "500"))
 TEST_WORKERS = int(os.environ.get("TEST_WORKERS", "20"))
 USER_AGENT = "Mozilla/5.0"
 
@@ -532,35 +537,42 @@ def main():
         log("无可用节点，不覆盖旧订阅。")
         return 3
 
-    # 并发 TCP 测试
-    alive = []
-    with ThreadPoolExecutor(max_workers=TEST_WORKERS) as pool:
-        futs = {pool.submit(tcp_latency_ms, n["server"], n["port"]): n for n in nodes}
-        for fut in as_completed(futs):
-            node, ms = futs[fut], fut.result()
-            if ms is not None and ms <= MAX_LATENCY_MS:
-                node["latency_ms"] = round(ms)
-                alive.append(node)
-    log(f"TCP 存活且延迟 <= {MAX_LATENCY_MS}ms: {len(alive)} 个")
+    # 2026-11-01 用户要求：不测速。GitHub 跑道在美国，它测的延迟和国内完全两回事，
+    # 测速只会把欧洲/美国节点排前面、把亚洲节点挤掉，还会把跑道上不通但国内能通的
+    # 节点误杀。测速交给 FlClash 在用户本地做（自动选择组），这里只做去重、风险过滤、
+    # 地区排序，不按延迟排序、不按 TCP 存活过滤。
+    alive = nodes
+    log(f"不测速：保留 {len(alive)} 个")
     if not alive:
         log("筛选后为空，不覆盖旧订阅。")
         return 4
 
-    # 地区过滤必须在取前 100 之前做，否则 GitHub 跑道（美国）测出的延迟会把
-    # 欧洲节点排前面、把亚洲节点挤出前 100——这也是之前“基本用不了”的一个原因：
-    # 从中国看，欧洲节点本来就远，还占了名额。
-    # 先补地区名、再只留东亚/东南亚/北美、最后按延迟取前 100；地区未知的也去掉，
-    # 因为无法证明它在目标地区，不编造地区。
+    # 地区优先排序（2026-11-01 用户要求：优先东亚、东南亚）：
+    # 东亚 0、东南亚 1、北美 2、其他/未知 3，同组内保持原来源顺序。
+    # 注意：只留东亚/东南亚/北美的话，现在 4 个来源加起来只有 298 条，
+    # 凑不够 500，所以这里不硬删其他地区，而是把其他地区排在最后当填充，
+    # 这样前 298 条是目标地区，后面才是其他地区；如果用户要硬删版（298 条），
+    # 把下面这行改回过滤即可。
     mapping = fetch_country_mapping()
     apply_region_names(alive, mapping)
-    before_region = len(alive)
-    alive = [n for n in alive if region_code(n, mapping) in ALLOWED_COUNTRIES]
-    log(f"地区过滤: {before_region} -> {len(alive)} 个（只留东亚/东南亚/北美）")
-    if not alive:
-        log("地区过滤后为空，不覆盖旧订阅。")
-        return 4
-    alive.sort(key=lambda x: x["latency_ms"])
+    ea = {"JP", "KR", "TW", "HK"}
+    sea = {"SG", "MY", "TH", "VN", "ID", "PH", "KH", "LA", "MM"}
+    na = {"US", "CA", "MX"}
+
+    def region_priority(n):
+        cc = region_code(n, mapping)
+        if cc in ea:
+            return 0
+        if cc in sea:
+            return 1
+        if cc in na:
+            return 2
+        return 3
+
+    alive.sort(key=region_priority)
     alive = alive[:MAX_NODES]
+    from collections import Counter as _Counter
+    log(f"地区分布: {_Counter(region_priority(n) for n in alive)}（0=东亚,1=东南亚,2=北美,3=其他/未知）")
     log(f"最终保留: {len(alive)} 个")
     for i, node in enumerate(alive, 1):
         node["name"] = f"{node['name']}-{i}" if alive else node["name"]
