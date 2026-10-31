@@ -59,6 +59,7 @@ SOURCES = [
 
 OUTPUT_YAML = os.environ.get("OUTPUT_YAML", "./sub.yaml")
 OUTPUT_TXT = os.environ.get("OUTPUT_TXT", "./sub.txt")
+OUTPUT_CONFIG = os.environ.get("OUTPUT_CONFIG", "./config.yaml")
 # 筛选阈值（可调）
 CONNECT_TIMEOUT = float(os.environ.get("CONNECT_TIMEOUT", "3"))  # 秒
 MAX_LATENCY_MS = float(os.environ.get("MAX_LATENCY_MS", "3000"))
@@ -284,6 +285,95 @@ def proxy_to_yaml(p):
     return None
 
 
+# fuzhang 格式重排（2026-11-01 用户选择）：节点改成块状 YAML（不再是单行 {...}），
+# 并且 vless 补齐 fuzhang 那份里都有的字段：encryption: none、packet-encoding: xudp（ws 时）、
+# udp、skip-cert-verify；vmess/trojan 也补 skip-cert-verify 和 udp，和 fuzhang 的取值一致
+# （vless udp true，其余 udp false）。这样 FlClash 按配置导入时不再只看到最少字段。
+def _block_opts_lines(p):
+    lines = []
+    if p.get("network") == "ws":
+        host = p.get("ws-host", "") or p.get("servername", "") or p.get("sni", "")
+        path = p.get("ws-path", "/") or "/"
+        lines.append("    ws-opts:")
+        lines.append(f"      path: {yaml_escape(path)}")
+        if host:
+            lines.append("      headers:")
+            lines.append(f"        Host: {yaml_escape(host)}")
+    if p.get("network") == "grpc":
+        lines.append("    grpc-opts:")
+        lines.append(f"      grpc-service-name: {yaml_escape(p.get('grpc-service-name', ''))}")
+    if p.get("network") == "xhttp":
+        lines.append("    xhttp-opts:")
+        lines.append(f"      path: {yaml_escape(p.get('xhttp-path', '/'))}")
+        if p.get("xhttp-mode"):
+            lines.append(f"      mode: {yaml_escape(p['xhttp-mode'])}")
+    return lines
+
+
+def _block_tls_lines(p):
+    lines = []
+    fp = p.get("fingerprint", "")
+    if fp in VALID_FINGERPRINTS:
+        lines.append(f"    client-fingerprint: {yaml_escape(fp)}")
+    if p.get("alpn"):
+        parts = [x.strip() for x in str(p["alpn"]).split(",") if x.strip()]
+        if parts:
+            lines.append("    alpn:")
+            for x in parts:
+                lines.append(f"      - {yaml_escape(x)}")
+    return lines
+
+
+def proxy_to_block_lines(p):
+    lines = [f"  - name: {yaml_escape(p['name'])}"]
+    lines.append(f"    type: {p['type']}")
+    lines.append(f"    server: {p['server']}")
+    lines.append(f"    port: {p['port']}")
+    if p["type"] == "ss":
+        lines.append(f"    cipher: {p['cipher']}")
+        lines.append(f"    password: {yaml_escape(p['password'])}")
+    elif p["type"] == "vmess":
+        lines.append(f"    uuid: {p['uuid']}")
+        lines.append(f"    alterId: {p.get('alterId', 0)}")
+        lines.append("    cipher: auto")
+        lines.append(f"    tls: {'true' if p.get('tls') else 'false'}")
+        if p.get("servername"):
+            lines.append(f"    servername: {yaml_escape(p['servername'])}")
+        lines.append(f"    network: {p.get('network', 'tcp')}")
+        lines += _block_opts_lines(p)
+        lines += _block_tls_lines(p)
+        lines.append("    skip-cert-verify: false")
+        lines.append("    udp: false")
+    elif p["type"] == "vless":
+        lines.append(f"    uuid: {p['uuid']}")
+        if p.get("flow"):
+            lines.append(f"    flow: {yaml_escape(p['flow'])}")
+        lines.append(f"    tls: {'true' if p.get('tls') else 'false'}")
+        lines.append(f"    servername: {yaml_escape(p.get('servername', ''))}")
+        lines.append(f"    network: {p.get('network', 'tcp')}")
+        lines += _block_opts_lines(p)
+        if p.get("reality"):
+            lines.append("    reality-opts:")
+            lines.append(f"      public-key: {yaml_escape(p.get('public_key', ''))}")
+            lines.append(f"      short-id: {yaml_escape(p.get('short_id', ''))}")
+        lines += _block_tls_lines(p)
+        lines.append("    encryption: none")
+        if p.get("network") == "ws":
+            lines.append("    packet-encoding: xudp")
+        lines.append("    skip-cert-verify: false")
+        lines.append("    udp: true")
+    elif p["type"] == "trojan":
+        lines.append(f"    password: {yaml_escape(p['password'])}")
+        lines.append(f"    sni: {yaml_escape(p.get('sni', ''))}")
+        if p.get("network") and p["network"] != "tcp":
+            lines.append(f"    network: {p['network']}")
+        lines += _block_opts_lines(p)
+        lines += _block_tls_lines(p)
+        lines.append(f"    skip-cert-verify: {'true' if p.get('skip-cert-verify') else 'false'}")
+        lines.append("    udp: false")
+    return lines
+
+
 # 大陆使用时的审查风险过滤（2026-11-01 用户要求）：
 #   保留：trojan（协议本身走 TLS）、vless tls、vless reality、vmess tls
 #   去除：ss（无 TLS 层，流量特征易被识别）、vmess 明文、vless security=none/false/空
@@ -432,25 +522,64 @@ def main():
     for i, node in enumerate(alive, 1):
         node["name"] = f"{node['name']}-{i}" if alive else node["name"]
 
-    names = ", ".join(yaml_escape(n["name"]) for n in alive)
+    # sub.yaml：订阅片段，节点改成块状写法（不再是单行 {...}）
     yaml_lines = ["proxies:"]
     for node in alive:
-        line = proxy_to_yaml(node)
-        if line:
-            yaml_lines.append(line)
-    yaml_lines += ["", "proxy-groups:",
-                   f"  - {{name: PROXY, type: select, proxies: [{names}]}}",
-                   "", "rules:", "  - MATCH,PROXY"]
+        yaml_lines += proxy_to_block_lines(node)
+    yaml_lines += ["", "proxy-groups:", "  - name: PROXY", "    type: select", "    proxies:"]
+    for node in alive:
+        yaml_lines.append(f"      - {yaml_escape(node['name'])}")
+    yaml_lines += ["", "rules:", "  - MATCH,PROXY"]
     yaml_text = "\n".join(yaml_lines) + "\n"
+
+    # config.yaml：fuzhang 式完整配置，可直接按配置导入 FlClash，
+    # 不再只靠订阅模式。节点和 sub.yaml 是同一批，只是多了顶层字段、
+    # 三个策略组和 fuzhang 同款规则（国内直连、其余走漏网之鱼组）。
+    cfg_lines = [
+        "mixed-port: 7890", "allow-lan: false", "bind-address: '*'", "mode: rule",
+        "log-level: info", "ipv6: false", "external-controller: 127.0.0.1:9090",
+        "dns:", "  enable: true", "  ipv6: false", "  enhanced-mode: fake-ip",
+        "  fake-ip-range: 198.18.0.1/16", "  nameserver:", "    - 223.5.5.5",
+        "    - 119.29.29.29", "    - 8.8.8.8", "  fallback:",
+        "    - tls://1.1.1.1:853", "    - tls://8.8.8.8:853",
+        "geox-url:", "  geoip: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat",
+        "  geosite: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat",
+        "  mmdb: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb",
+        "", "proxies:",
+    ]
+    for node in alive:
+        cfg_lines += proxy_to_block_lines(node)
+    cfg_lines += ["", "proxy-groups:",
+                  "  - name: 🚀 节点选择", "    type: select", "    proxies:",
+                  "      - ♻️ 自动选择", "      - DIRECT"]
+    for node in alive:
+        cfg_lines.append(f"      - {yaml_escape(node['name'])}")
+    cfg_lines += ["  - name: ♻️ 自动选择", "    type: url-test",
+                  "    url: http://www.gstatic.com/generate_204", "    interval: 300",
+                  "    proxies:"]
+    for node in alive[:80]:
+        cfg_lines.append(f"      - {yaml_escape(node['name'])}")
+    cfg_lines += ["  - name: 🐟 漏网之鱼", "    type: select", "    proxies:",
+                  "      - 🚀 节点选择", "      - DIRECT",
+                  "", "rules:",
+                  "  - DOMAIN-SUFFIX,cn,DIRECT",
+                  "  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
+                  "  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve",
+                  "  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve",
+                  "  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve",
+                  "  - GEOIP,CN,DIRECT",
+                  "  - MATCH,🐟 漏网之鱼"]
+    config_text = "\n".join(cfg_lines) + "\n"
 
     # 原子写入：先写临时文件再 mv，避免 FlClash 读到一半的文件
     for path, text in ((OUTPUT_YAML, yaml_text),
-                        (OUTPUT_TXT, "\n".join(n["link"] for n in alive) + "\n")):
+                        (OUTPUT_TXT, "\n".join(n["link"] for n in alive) + "\n"),
+                        (OUTPUT_CONFIG, config_text)):
         tmp = path + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             f.write(text)
         os.replace(tmp, path)
-    log(f"已写入 {OUTPUT_YAML} / {OUTPUT_TXT}，共 {len(alive)} 个节点")
+    log(f"已写入 {OUTPUT_YAML} / {OUTPUT_TXT} / {OUTPUT_CONFIG}，共 {len(alive)} 个节点")
     return 0
 
 
